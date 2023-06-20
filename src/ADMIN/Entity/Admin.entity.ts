@@ -3,6 +3,7 @@ import { Entity,Column,PrimaryColumn } from "typeorm";
 export class Admin{
     @PrimaryColumn()
     id:number;
+    
     @Column()
     name:string;
     @Column()

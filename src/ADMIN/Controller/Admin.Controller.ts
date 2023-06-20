@@ -2,7 +2,6 @@ import { Controller, Get ,Param,Body, Post, Put,Delete} from '@nestjs/common';
 import { AdminService } from '../Services/Admin.Services';
 import { get } from 'http';
 import { Repository } from 'typeorm';
-import { Admin } from '../Entity/Admin.entity';
 
 @Controller('admin')
 export class AdminController {
