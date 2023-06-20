@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { AdminDto } from "../Dtos/Admin.dto";
+import { Repository } from 'typeorm';
+import { Admin } from '../Entity/Admin.entity';
+import { InjectRepository } from '@nestjs/typeorm';
   let admin=[];
   const dummyData = [
     {
@@ -41,26 +44,30 @@ import { AdminDto } from "../Dtos/Admin.dto";
    ;admin.push(dummyData);
 @Injectable()
 export class AdminService {
+  constructor(
+    @InjectRepository(Admin)
+    private usersRepository: Repository<Admin>,
+  ) {}
 
 
-    getAllAdmins(){
+    getAllAdmins():Promise<Admin[]>{
       
-        return admin;
+      return this.usersRepository.find();
 
     }
 
-    createAdmin(adminDto:AdminDto){
-        admin.push(adminDto);
-        return adminDto;
+    createAdmin(adminDto:AdminDto) :Promise<Admin>{
+      console.log("Service active");
+      return this.usersRepository.save(adminDto);
     }
-    getAdminById(id:number){
+    getAdminById(id:number): Promise<Admin | null>{
         console.log(id);
         console.log("Service active");
         if(id!=null){
           var  value= admin.find((admin)=>admin.userId==id);
           console.log(value.typeof);
 
-            return value;
+          return this.usersRepository.findOneBy({ id });
         }
     }
     updateAdminById(id:number,adminDto:AdminDto){
@@ -71,11 +78,11 @@ export class AdminService {
         return adminDto;
     }
 
-    deleteAdminById(id:number){
+    async  deleteAdminById(id:number): Promise<void>{
         console.log("Delete Service active");
         var index=admin.findIndex((admin)=>admin.userId==id);
         admin.splice(index,1);
-        return admin;
+        await this.usersRepository.delete(id);
     }
 
 }
