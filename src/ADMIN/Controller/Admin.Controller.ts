@@ -10,6 +10,7 @@ export class AdminController {
 getAdmins(){
     return this.adminService.getAllAdmins();
 }
+
 @Post("/createadmin")
 createAdmin(@Body() body){
     var result= this.adminService.createAdmin(body);
@@ -34,6 +35,7 @@ updateAdminById(@Param('id') id:number,@Body() body){
     console.log(result);
         return result
     }
+    
 
 
 

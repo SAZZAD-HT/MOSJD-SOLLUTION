@@ -13,11 +13,12 @@ export class AdminDto {
     userId: number;
     @IsNotEmpty(        { message: 'Email is Emplty' }    )
     @IsEmail(        { }, { message: 'Email is not a Email' }    )
-    email: string;
+    email: string; 
     @IsNotEmpty(        { message: 'Password is Emplty' }    )
     password: string;
     @IsNotEmpty(        { message: 'Role is Emplty' }    )
     userRole: string;
+
 
 
 }
