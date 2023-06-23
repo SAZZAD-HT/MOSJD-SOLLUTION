@@ -6,8 +6,8 @@ export class BookingMosque {
   @PrimaryGeneratedColumn()
   MBookingId: number;
 
-  @ManyToOne(() => Mosque)
-  idMosque: Mosque;
+  @ManyToOne(() => Mosque, mosque => mosque.bookings)
+  mosque: Mosque;
 
   @Column()
   BookingTime: Date;
@@ -18,5 +18,5 @@ export class BookingMosque {
   @Column()
   BookingType: string;
 
-  
+
 }

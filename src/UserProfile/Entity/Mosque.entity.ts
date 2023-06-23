@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { BookingMosque } from './Booking.Mosque.Entity';
 
 @Entity()
 export class Mosque {
@@ -40,5 +41,7 @@ export class Mosque {
 
   @Column()
   Announcement: string;
-  
+
+  @OneToMany(() => BookingMosque, bookingMosque => bookingMosque.mosque )
+  bookings: BookingMosque[];
 }
