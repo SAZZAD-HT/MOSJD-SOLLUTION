@@ -26,6 +26,7 @@ export class UserController {
     
     @Post('/create')
     async create(@Body() user: AddUserDto): Promise<User> {
+        console.log("Controller"+user);
         return await this.userService.create(user);
     }
 
@@ -51,6 +52,7 @@ export class UserController {
     }
     @Put('/Mosjid/update/:id')
     async updateMosjid(@Param('id', ParseIntPipe) id: number, @Body() user: Mosque): Promise<void> {
+        console.log("Controller");
       var dr=  await this.MosjidService.mupdate(id, user);
       return dr;}
     @Delete('/Mosjid/delete/:id')

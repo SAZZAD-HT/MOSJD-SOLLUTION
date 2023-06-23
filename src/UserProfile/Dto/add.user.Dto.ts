@@ -2,10 +2,11 @@ import { IsNotEmpty,IsNumber,MaxLength,MinLength,Length,IsEmail,IsOptional } fro
 
 export class AddUserDto {
     @IsNotEmpty()
-    @MaxLength(50)
-    @MinLength(3)
+    @MaxLength(530)
+    @MinLength(33)
     UserName: string;
 
+    
     @IsNotEmpty()
     @IsEmail()
     UserEmail: string;
