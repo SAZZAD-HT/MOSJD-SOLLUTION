@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm';
@@ -32,5 +32,30 @@ export class UserService {
     
     async delete(id: number): Promise<void> {
         await this.userRepo.delete(id);
+    }
+
+    async findOne(UserId: number): Promise<User> {
+        return await this.userRepo.findOneBy({UserId});
+    }
+    
+    async findemail(UserEmail: string): Promise<User> {
+        return await this.userRepo.findOneBy({UserEmail});
+    }
+    async findpassword(UserPassword: string): Promise<User> {
+        return await this.userRepo.findOneBy({UserPassword});
+    }
+    async signin(email: string, password: string) {
+        const user = await this.findemail(email);
+        if (!user) {
+            console.log("User not found");
+            throw new NotFoundException('User not found');
+        }
+        if (user.UserPassword !== password) {
+            console.log("Invalid password");
+            throw new BadRequestException('Invalid password');
+        }
+
+        return user;
+
     }
 }
