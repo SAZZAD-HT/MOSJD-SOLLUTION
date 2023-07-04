@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MOSJIDS</title><style>
+    
+    body {
+      background-image: url('./Users/assets/images/help.webp'); /* Replace with the path to your background image */
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: #cc0101;
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.5); /* Change the background color and transparency as desired */
+    }
+    table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table th, table td {
+  border: 2px solid #d41d1d;
+  padding: 8px;
+}
+
+table th {
+  background-color: #f2f2f2;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.actions button {
+  margin-right: 5px;
+}
+
+  </style>
+</head>
+<body>
+  <h1>Namaz Time</h1>
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>Mosque Name</th>
+        <th>Location</th>
+        <th>Fazar</th>
+        <th>Zuhur</th>
+        <th>Asor</th>
+        <th>Magrib</th>
+        <th>Jummah</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- User data will be dynamically added here -->
+    </tbody>
+  </table>
+  <script>
+    const apiUrl = 'http://localhost:3000/mosjid'; // Update the API URL if needed
+    const tableBody = document.querySelector('tbody');
+
+    async function fetchData() {
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        return [];
+      }
+    }
+
+    async function displayData() {
+      const adminData = await fetchData();
+      tableBody.innerHTML = '';
+
+      adminData.forEach((data) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${data.MosqueName}</td>
+          <td>${data.MLocation}</td>
+          <td>${data.Fazar}</td>
+          <td>${data.Zuhur}</td>
+          <td>${data.Asor}</td>
+          <td>${data.magrib}</td>
+          <td>${data.Jummah}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Call the displayData function to fetch and display the data
+    displayData();
+  </script>
+</body>
+</html>

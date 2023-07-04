@@ -8,6 +8,7 @@ import { UserService } from '../Services/add.User.Service';
 import { UserController } from '../ShowProfile.controller';
 import { OthersServices } from '../Services/Others.Services';
 import { MosjidService } from '../Services/AddMosjid.service';
+import { MosjidController } from 'src/Mosque/Mosquecntroller';
 
 
 @Module({
@@ -24,7 +25,7 @@ import { MosjidService } from '../Services/AddMosjid.service';
 	}),TypeOrmModule.forFeature([BookingMosque,Mosque,User,UserBookings])
 	],
   providers: [UserService,OthersServices,MosjidService],
-  controllers: [UserController]
+  controllers: [UserController,MosjidController ]
 
 })
 export class DatabaseModulemosque {}

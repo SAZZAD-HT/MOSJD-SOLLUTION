@@ -19,8 +19,8 @@ export class MosjidService {
             return data;
         }
         
-        // async findOne(IdMosque: number): Promise<Mosque> {
-        //     return await this.userRepo.findOneBy(IdMosque);
+        //  async findOne(IdMosque: number): Promise<Mosque> {
+        //     return await this.userRepo.findOneBy( IdMosque);
         // }
         
         async mcreate(m: AddMosjidDto): Promise<Mosque> {

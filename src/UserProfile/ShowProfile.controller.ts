@@ -1,6 +1,6 @@
 import {  Body,  Controller,  Delete,  FileTypeValidator,  Get,  MaxFileSizeValidator,  Param,  ParseFilePipe,  ParseIntPipe,  Patch,  Post,  Put,  Query,  Res,  Session,  UnauthorizedException,  UploadedFile,  UseGuards,  UseInterceptors,  UsePipes,  ValidationPipe,} from '@nestjs/common';
 import { UserService } from './Services/add.User.Service';
-import { AddUserDto } from './Dto/add.user.Dto';
+import { AddUserDto, LoginUserDto } from './Dto/add.user.Dto';
 import { User } from './Entity/User.entity';
 import { OthersServices } from './Services/Others.Services';
 import { MosjidService } from './Services/AddMosjid.service';
@@ -19,10 +19,10 @@ export class UserController {
         return await this.userService.findAll();
     }
     
-    // @Get(':id')
-    // async findOne(@Param('id', ParseIntPipe) id: number): Promise<User> {
-    //     return await this.userService.findOneBy(id);
-    // }
+      @Get(':id')
+    async findOne(@Param('id', ParseIntPipe) UserId: number): Promise<User> {
+        return await this.userService.findOneBy( UserId);
+    }
     
     @Post('/create')
     async create(@Body() user: AddUserDto): Promise<User> {
@@ -34,16 +34,22 @@ export class UserController {
     
     @Put('/update/:id')
     async update(@Param('id', ParseIntPipe) id: number, @Body() user: User): Promise<void> {
+        console.log("Controller");
+
         await this.userService.update(id, user);
     }
     
     @Delete('/delete/:id')
     async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
         await this.userService.delete(id);
+
+        
+    
     }
 
     @Get("/Mosjid")
     async findMosjid(): Promise<Mosque[]> {
+      console.log("Controller");
         return await this.MosjidService.mfindAll();
     }
     @Post('/Mosjid/create')
@@ -66,6 +72,34 @@ export class UserController {
      var data=await this.OtherServices.getMosqueDataByUserId(userId);
      return data;
   }
+  @Post('/signin')
+  async signin(@Body() body: LoginUserDto, @Session() session: any) {
+    const user = await this.userService.signin(body. UserEmail, body. UserPassword);
+
+    session.userId = user.UserId;
+    console.log("signin"+session.userId);
+    return user;
+  }
+  
+
+
+  @Post('/signout')
+ logout(@Session() session: any) {
+  console.log("logout"+session.userId);
+   session.userId = null;
+   session.destroy();
+   console.log("logout"+session.userId);
+   return { message: 'Signout successful' };
+ }
+ //http://localhost:3002/user/profile
+ @Get('/profile')
+ async profile(@Session() session: Record<string, any>) {
+   if (!session.userId) {
+     throw new UnauthorizedException('User is not logged in');
+   }
+   const user = await this.userService.findOne(session.userId);
+   return user + "profile";
+ }
 
 
 

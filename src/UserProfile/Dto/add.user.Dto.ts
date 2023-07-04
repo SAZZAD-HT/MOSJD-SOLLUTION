@@ -5,6 +5,7 @@ export class AddUserDto {
     @MaxLength(530)
     @MinLength(33)
     UserName: string;
+    UserId: number; 
 
     
     @IsNotEmpty()
