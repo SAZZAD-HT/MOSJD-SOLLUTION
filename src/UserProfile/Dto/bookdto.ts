@@ -18,13 +18,15 @@ export class BookDto{
   
   
     
-    BookingStatus: number;
+    BookingStatus: string;
   
 
     BookingType: string;
 }
 
 export class booked{
+    MBookingId: number;
+    BookingStatus: string;
 
     
 }

@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AdminController } from './ADMIN/Controller/Admin.Controller';
-import { AdminService } from './ADMIN/Services/Admin.Services';
- import{UserController} from './UserProfile/ShowProfile.controller';
+
+ import{UserController} from './UserProfile/AdminController';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Admin } from 'typeorm';
-import { DatabaseModule } from './ADMIN/Entity/database.module';
+
 import { DatabaseModulemosque } from './UserProfile/DatabaseConfig/database.Config';
 import { UserService } from './UserProfile/Services/add.User.Service';
 
@@ -17,6 +16,6 @@ import { UserService } from './UserProfile/Services/add.User.Service';
 
   imports: [DatabaseModulemosque],
   controllers: [],
-  providers: [AdminService],
+  providers: [],
 })
 export class AppModule {}

@@ -7,9 +7,7 @@ export class BookingMosque {
   MBookingId: number;
  
 
-  @ManyToOne(() => Mosque, mosque => mosque.bookings)
-  mosque: Mosque;
-
+ 
   @Column()
   BookingTime: String;
   @Column() 
@@ -17,11 +15,11 @@ export class BookingMosque {
   @Column()
   BoookingDuration: String; 
   @Column() 
-Bookedby: String;
+  Bookedby: String;
 
 
   @Column()
-  BookingStatus: number;
+  BookingStatus: string;
 
   @Column()
   BookingType: string;

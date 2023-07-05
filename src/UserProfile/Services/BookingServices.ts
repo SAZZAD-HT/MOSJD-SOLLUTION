@@ -5,6 +5,7 @@ import { BookingMosque } from '../Entity/Booking.Mosque.Entity';
 import { Mosque } from '../Entity/Mosque.entity';
 import { Announcemententity } from '../Entity/Announcementen';
 import { AnnouncemetDto, annch } from '../Dto/ann.dto';
+import { booked } from '../Dto/bookdto';
 
 
 @Injectable()
@@ -15,11 +16,36 @@ export class BookingServices {
   ) {}
 
   
-  
+  //all
   async Findbooked(): Promise<BookingMosque[]> {
     return await this.book.find();
   }
+  //Individual
   async findOne(MBookingId: number): Promise<BookingMosque> {
     return await this.book.findOneBy({MBookingId});
+
 }
+async create(booking: BookingMosque): Promise<BookingMosque> {
+    return await this.book.save(booking);
 }
+async ForMosjidApprove(BookingType:string,BookingStatus:string): Promise<BookingMosque> {
+  return await this.book.findOne({where:[
+    {BookingType: 'USER'},
+    {BookingStatus: 'PENDING' },
+  ],
+});
+}   
+async bstauschange(B:booked): Promise<BookingMosque> {
+
+   return await this.book.save(B);
+}
+async BoookingConfirmed(BookingStatus:string): Promise<BookingMosque> {
+    return await this.book.findOne({where:[
+     
+        {BookingStatus: 'CONFIRMED' },
+       
+    ],
+    });
+
+
+}}

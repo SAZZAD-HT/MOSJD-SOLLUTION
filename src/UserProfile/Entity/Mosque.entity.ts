@@ -42,6 +42,5 @@ export class Mosque {
   @Column()
   Announcement: string;
 
-  @OneToMany(() => BookingMosque, bookingMosque => bookingMosque.mosque )
-  bookings: BookingMosque[];
+ 
 }

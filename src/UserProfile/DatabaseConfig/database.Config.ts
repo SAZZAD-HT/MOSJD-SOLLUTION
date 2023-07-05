@@ -5,11 +5,13 @@ import { Mosque } from '../Entity/Mosque.entity';
 import { UserBookings } from '../Entity/User.Bookings.entity';
 import { User } from '../Entity/User.entity';
 import { UserService } from '../Services/add.User.Service';
-import { UserController } from '../ShowProfile.controller';
+import { UserController } from '../AdminController';
 import { OthersServices } from '../Services/Others.Services';
 import { MosjidService } from '../Services/AddMosjid.service';
 import { MosjidController } from 'src/Mosque/Mosquecntroller';
 import { Announcemententity } from '../Entity/Announcementen';
+import { BookingServices } from '../Services/BookingServices';
+import { AnnouncmentService } from '../Services/AnnouncmentService';
 
 
 @Module({
@@ -20,12 +22,13 @@ import { Announcemententity } from '../Entity/Announcementen';
         port: 3306,
         username: 'root',
         password: 'sazzad',
-        database: 'Test',
-        entities: [Mosque,User,UserBookings,BookingMosque],
+        database: 'islam',
+        //entities: [Mosque,User,UserBookings,BookingMosque,Announcemententity],
+        autoLoadEntities: true,
         synchronize: false,
 	}),TypeOrmModule.forFeature([BookingMosque,Mosque,User,UserBookings,Announcemententity])
 	],
-  providers: [UserService,OthersServices,MosjidService],
+  providers: [UserService,OthersServices,MosjidService,BookingServices,AnnouncmentService],
   controllers: [UserController,MosjidController ]
 
 })
