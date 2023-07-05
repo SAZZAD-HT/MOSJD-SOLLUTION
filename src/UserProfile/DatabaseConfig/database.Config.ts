@@ -9,6 +9,7 @@ import { UserController } from '../ShowProfile.controller';
 import { OthersServices } from '../Services/Others.Services';
 import { MosjidService } from '../Services/AddMosjid.service';
 import { MosjidController } from 'src/Mosque/Mosquecntroller';
+import { Announcemententity } from '../Entity/Announcementen';
 
 
 @Module({
@@ -22,7 +23,7 @@ import { MosjidController } from 'src/Mosque/Mosquecntroller';
         database: 'Test',
         entities: [Mosque,User,UserBookings,BookingMosque],
         synchronize: false,
-	}),TypeOrmModule.forFeature([BookingMosque,Mosque,User,UserBookings])
+	}),TypeOrmModule.forFeature([BookingMosque,Mosque,User,UserBookings,Announcemententity])
 	],
   providers: [UserService,OthersServices,MosjidService],
   controllers: [UserController,MosjidController ]

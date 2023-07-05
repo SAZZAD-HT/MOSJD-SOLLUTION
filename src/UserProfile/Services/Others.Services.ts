@@ -3,13 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BookingMosque } from '../Entity/Booking.Mosque.Entity';
 import { Mosque } from '../Entity/Mosque.entity';
+import { Announcemententity } from '../Entity/Announcementen';
+import { AnnouncemetDto, annch } from '../Dto/ann.dto';
 
 
 @Injectable()
 export class OthersServices {
   constructor(
     @InjectRepository(Mosque)
-    private readonly mosqueRepository: Repository<Mosque>,
+    private readonly mosqueRepository: Repository<Mosque>
   ) {}
 
   async getMosqueDataByUserId(userId: number): Promise<any> {
@@ -27,4 +29,6 @@ export class OthersServices {
       .where('user.UserId = :userId', { userId })
       .getRawOne();
   }
+  
+  
 }

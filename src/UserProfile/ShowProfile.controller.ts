@@ -76,8 +76,8 @@ export class UserController {
   async signin(@Body() body: LoginUserDto, @Session() session: any) {
     const user = await this.userService.signin(body. UserEmail, body. UserPassword);
 
-    session.userId = user.UserId;
-    console.log("signin"+session.userId);
+    session.userId =2565 ;
+    console.log(session.userId);
     return user;
   }
   

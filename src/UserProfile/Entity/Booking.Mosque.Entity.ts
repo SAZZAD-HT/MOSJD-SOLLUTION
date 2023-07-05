@@ -5,12 +5,20 @@ import { Mosque } from './Mosque.entity';
 export class BookingMosque {
   @PrimaryGeneratedColumn()
   MBookingId: number;
+ 
 
   @ManyToOne(() => Mosque, mosque => mosque.bookings)
   mosque: Mosque;
 
   @Column()
-  BookingTime: Date;
+  BookingTime: String;
+  @Column() 
+  BookingDate: String;
+  @Column()
+  BoookingDuration: String; 
+  @Column() 
+Bookedby: String;
+
 
   @Column()
   BookingStatus: number;
