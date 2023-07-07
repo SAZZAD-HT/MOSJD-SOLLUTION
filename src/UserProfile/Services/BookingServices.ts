@@ -30,7 +30,7 @@ async create(booking: BookingMosque): Promise<BookingMosque> {
 }
 async ForMosjidApprove(BookingType:string,BookingStatus:string): Promise<BookingMosque[]> {
  var val= await this.book.find({where:[
-    {BookingType: 'USER'},
+  
     {BookingStatus: 'PENDING' },
   ],
 });

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    table th {
+      background-color: #f2f2f2;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .actions button {
+      margin-right: 5px;
+    }
+
+    .edit-btn,
+    .delete-btn {
+      padding: 6px 12px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .edit-btn:hover,
+    .delete-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .edit-btn {
+      animation: rotateBtn 2s linear infinite;
+    }
+
+    @keyframes rotateBtn {
+      0% { transform: rotate(0); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .delete-btn {
+      animation: bounceBtn 1s ease infinite;
+    }
+
+    @keyframes bounceBtn {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+
+  </style>
+</head>
+<body>
+  <h1>Mosjid Data</h1>
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>Serial</th>
+        <th>IdMosque</th>
+      <th>MosqueName</th>
+      <th>MLocation</th>
+      <th>city</th>
+      <th>Description</th>
+      <th>Capacity</th>
+      <th>Fazar</th>
+      <th>Zuhur</th>
+      <th>Asor</th>
+      <th>magrib</th>
+      <th>esha</th>
+      <th>Jummah</th>
+      <th>Announcement</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- User data will be dynamically added here -->
+    </tbody>
+  </table>
+
+  <script >
+    const apiUrl = 'http://localhost:3000/mosjid';
+const tableBody = document.querySelector('tbody');
+
+async function fetchData() {
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return [];
+  }
+}
+
+async function displayData() {
+  const adminData = await fetchData();
+  tableBody.innerHTML = '';
+
+  adminData.forEach((data, index) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${data.IdMosque}</td>
+      <td>${data.MosqueName}</td>
+      <td>${data.city}</td>
+      <td>${data.Description}</td>
+      <td>${data.Capacity}</td>
+      <td>${data.Fazarn}</td>
+      <td>${data.Zuhur}</td>
+      <td>${data.Asor}</td>
+      <td>${data.magrib}</td>
+      <td>${data.esha}</td>
+      <td>${data.Jummah}</td>
+      <td>${data.Announcement}</td>
+      <td class="action-buttons">
+        <button class="edit-btn" onclick="editData(${data.IdMosque})">Edit</button>
+        <button class="delete-btn" onclick="deleteData(${data.IdMosque})">Delete</button>
+      </td>
+    `;
+    tableBody.appendChild(row);
+  });
+}
+
+function editData(IdMosque) {
+    
+ // alert(`Edit data for row ${index + 1}`);
+  window.location.href = `./editMosjid.html?userId=${IdMosque}`;
+}
+
+function deleteData(IdMosque) {
+  window.location.href = `./deleteMosjid.html?userId=${IdMosque}`;
+}
+
+// Call displayData to fetch and show data when the page loads
+displayData();
+
+  </script>
+</body>
+</html>
