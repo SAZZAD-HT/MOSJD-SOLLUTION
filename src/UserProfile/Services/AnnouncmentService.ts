@@ -38,6 +38,9 @@ async updateStatus(id: number, user: annch): Promise<void> {
 async create(announcement: AnnouncemetDto): Promise<Announcemententity> {
   return await this.anny.save(announcement);
 }
+async delete(id: number): Promise<void> {
+  await this.anny.delete(id);
+}
   
  
 }

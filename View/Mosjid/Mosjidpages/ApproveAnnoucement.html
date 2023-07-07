@@ -42,7 +42,7 @@
     }
 
     .edit-btn {
-      animation: rotateBtn 2s linear infinite;
+        animation: bounceBtn 1s ease infinite;
     }
 
     @keyframes rotateBtn {
@@ -51,7 +51,7 @@
     }
 
     .delete-btn {
-      animation: bounceBtn 1s ease infinite;
+      animation: bounceBtn 3s ease infinite;
     }
 
     @keyframes bounceBtn {
@@ -68,19 +68,11 @@
     <thead>
       <tr>
         <th>Serial</th>
-        <th>IdMosque</th>
-      <th>MosqueName</th>
-      <th>MLocation</th>
-      <th>city</th>
-      <th>Description</th>
-      <th>Capacity</th>
-      <th>Fazar</th>
-      <th>Zuhur</th>
-      <th>Asor</th>
-      <th>magrib</th>
-      <th>esha</th>
-      <th>Jummah</th>
-      <th>Announcement</th>
+        <th>Announcement Id</th>
+        <th>Annnouncement</th>
+        <th>AnnouncementDate</th>
+        <th>createdby</th>
+        <th>Annnouncement Status</th>
       </tr>
     </thead>
     <tbody>
@@ -89,7 +81,7 @@
   </table>
 
   <script >
-    const apiUrl = 'http://localhost:3000/mosjid';
+    const apiUrl = 'http://localhost:3000/Announcement';
 const tableBody = document.querySelector('tbody');
 
 async function fetchData() {
@@ -110,39 +102,89 @@ async function displayData() {
   adminData.forEach((data, index) => {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${data.IdMosque}</td>
-      <td>${data.MosqueName}</td>
-      <td>${data.city}</td>
-      <td>${data.Description}</td>
-      <td>${data.Capacity}</td>
-      <td>${data.Fazarn}</td>
-      <td>${data.Zuhur}</td>
-      <td>${data.Asor}</td>
-      <td>${data.magrib}</td>
-      <td>${data.esha}</td>
-      <td>${data.Jummah}</td>
+    <td>${index + 1}</td>
+      <td>${data.IdAnnouncement}</td>
       <td>${data.Announcement}</td>
+      <td>${data.AnnouncementDate}</td>
+      <td>${data.createdby}</td>
+      <td>${data.AnnouncemnentStaus}</td>
       <td class="action-buttons">
-        <button class="edit-btn" onclick="editData(${data.IdMosque})">Edit</button>
-        <button class="delete-btn" onclick="deleteData(${data.IdMosque})">Delete</button>
+        <button class="edit-btn" onclick="editData(${data.IdAnnouncement})">Approve</button>
+        <button class="delete-btn" onclick="deleteData(${data.IdAnnouncement})">Reject</button>
       </td>
     `;
     tableBody.appendChild(row);
   });
 }
-
-function editData(IdMosque) {
+function sendRequest(method, url, data = null) { return new Promise((resolve, reject) => {
+    axios({
+      method: method,
+      url: url,
+      data: data,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        resolve(response.data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+}
+async function editData(IdAnnouncement) {
     
- // alert(`Edit data for row ${index + 1}`);
-  window.location.href = `./editMosjid.html?userId=${IdMosque}`;
+    const data = {
+    IdAnnouncement:IdAnnouncement,
+
+    AnnouncemnentStaus: "Active",
+
+  
+      };
+      console.log(data);
+     
+      const response = await fetch(`http://localhost:3000/Announcement/Change-status/${IdAnnouncement}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      alert('APPOOVED!');
+      registerForm.reset();
+    } else {
+      alert('Failed to register admin!');
+    }
 }
 
-function deleteData(IdMosque) {
+   function deleteData(IdAnnouncement) {
+       fetch(`http://localhost:3000/Announcement/delete/${IdAnnouncement}`, { method: 'DELETE' })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Admin deleted successfully.');
+            // Redirect to the admin dashboard page
+            window.location.href = '/viewMosjid.html';
+          } else {
+            alert('Failed to delete admin.');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          alert('Admin deleted successfully.');
+          
+          
+        });
   window.location.href = `./deleteMosjid.html?userId=${IdMosque}`;
 }
 
-// Call displayData to fetch and show data when the page loads
+
+
+
+  
 displayData();
 
   </script>

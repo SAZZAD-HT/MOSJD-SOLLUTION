@@ -56,6 +56,15 @@ export class AnnouncmentController{
     
             await this.ann.updateStatus(id, user);
         }
+        @Delete('/delete/:id')
+        async deleteAnnouncement(@Param('id', ParseIntPipe) id: number): Promise<void> {
+          try {
+            await this.ann.delete(id);
+          } catch (error) {
+            // Handle any errors that occurred during the deletion process
+            console.error('Error deleting announcement:', error);
+          }
+        }
       }
       
 
