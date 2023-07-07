@@ -4,7 +4,7 @@
   <title>Admin Panel</title>
   <style>
     /* Default styles */
-
+ 
     html, body {
       margin: 0;
       padding: 0;
@@ -125,44 +125,7 @@ table tr:nth-child(even) {
 
 .actions button {
   margin-right: 5px;
-}.actions button {
-      margin-right: 5px;
-    }
-
-    .edit-btn,
-    .delete-btn {
-      padding: 6px 12px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
-    }
-
-    .edit-btn:hover,
-    .delete-btn:hover {
-      background-color: #0056b3;
-    }
-
-    .edit-btn {
-      animation: rotateBtn 2s linear infinite;
-    }
-
-    @keyframes rotateBtn {
-      0% { transform: rotate(0); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .delete-btn {
-      animation: bounceBtn 1s ease infinite;
-    }
-
-    @keyframes bounceBtn {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-10px); }
-      60% { transform: translateY(-5px); }
-    }
+}
 
     /* Rest of the styles */
 
@@ -172,10 +135,7 @@ table tr:nth-child(even) {
 </head>
 <body>
   <div class="header">
-    <h1>Admin Panel</h1>
    
-    <a class="mosjid-button" href="#">Mosjid</a>
-    <a class="user-button" href="#">User</a>
     <a class="sign-out" href="#" onclick="signOut()">Sign Out</a>
   </div>
   
@@ -183,34 +143,16 @@ table tr:nth-child(even) {
      
     <div class="content-area">
         <div class="action-buttons">
-          <button onclick="addUser()">Add User</button>
-          <button onclick="removeUser()">Remove User</button>
-          <button onclick="addMosjid()">Add Mosjid</button>
-          <button onclick="removeMosjid()">Remove Mosjid</button>
-          <button onclick="updateUser()">Update User</button>
-          <button onclick="updateMosjid()">Update Mosjid</button>
+          <button onclick="Annnouncement()">Annnouncement</button>
+          <button onclick="Annnouncementreq()">Announcement request</button>
+          <button onclick="bookimam()">BookImam</button>
+          <button onclick="salatTime()">SALAt Time</button>
+          <button onclick="Donate()">Donate</button>
+          <button onclick="Alquran()">Al-Quran</button>
+          <button onclick="updateMosjid()">BeingMumin</button>
         </div>
 
-            <h1>User Data</h1>
-            <table id="userTable">
-              <thead>
-                <tr>
-                  <th>Serial</th>
-                  <th>User Name</th>
-                  <th>User Email</th>
-                  <th>User Password</th>
-                  <th>Contact</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Description</th>
-                
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- User data will be dynamically added here -->
-              </tbody>
-            </table>
+        
           
   
 
@@ -220,33 +162,33 @@ table tr:nth-child(even) {
       alert('Signing out...');
     }
 
-    function addUser() {
+    function Annnouncement() {
       // Handle add user functionality here
       alert('Adding user...');
       window.location.href = "../View/addUser.html";
     }
 
-    function removeUser() {
+    function Annnouncementreq() {
       // Handle remove user functionality here
       alert('Removing user...');
     }
 
-    function addMosjid() {
+    function bookimam() {
       // Handle add Mosjid functionality here
       alert('Adding Mosjid...');
     }
 
-    function removeMosjid() {
+    function salatTime() {
       // Handle remove Mosjid functionality here
-      alert('Removing Mosjid...');
+      window.location.href = "../View/Namaztime.html";
     }
 
-    function updateUser() {
-      // Handle update user functionality here
+    function Donate() {
+      
       alert('Updating user...');
     }
 
-    function updateMosjid() {
+    function uAlqurand() {
       // Handle update Mosjid functionality here
       alert('Updating Mosjid...');
     }

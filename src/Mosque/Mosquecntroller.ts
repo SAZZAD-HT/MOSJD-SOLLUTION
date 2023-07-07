@@ -20,7 +20,7 @@ export class MosjidController {
       console.log("Controller");
         return await this.MosjidService.mfindAll();
     }
-    @Post('/Mosjid/create')
+    @Post('/create')
     async createMosjid(@Body() user:  AddMosjidDto): Promise<Mosque> {
         return await this.MosjidService.mcreate(user);
     }
@@ -29,17 +29,17 @@ export class MosjidController {
         console.log("Controller");
       var dr=  await this.MosjidService.mupdate(id, user);
       return dr;}
-    @Delete('/Mosjid/delete/:id')
+    @Delete('/delete/:id')
     async deleteMosjid(@Param('id', ParseIntPipe) id: number): Promise<void> {
        var dr= await this.MosjidService.mdelete(id);
         return dr;
     }
     
-//     @Get('/Mosjid/:userId')
-//      async getMosqueDataByUserId(@Param('userId') userId: number): Promise<any> {
-//      var data=await this.OtherService.getMosqueDataByUserId(userId);
-//      return data;
-//   }
+    @Get(':userId')
+     async getMosqueDataByUserId(@Param('userId') userId: number): Promise<any> {
+     var data=await this.MosjidService.findOne(userId);
+     return data;
+  }
 
   }
   

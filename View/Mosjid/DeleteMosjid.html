@@ -69,11 +69,12 @@
   <script >
     const queryParams = new URLSearchParams(window.location.search);
 const userId = queryParams.get('userId');
+console.log(userId);
 const userDetailsDiv = document.getElementById('userDetails');
 
 async function fetchUserDetails() {
   try {
-    const response = await fetch(`http://localhost:3000/user/${userId}`);
+    const response = await fetch(`http://localhost:3000/mosjid/${userId}`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -86,14 +87,20 @@ async function displayUserDetails() {
   const userDetails = await fetchUserDetails();
   if (userDetails) {
     userDetailsDiv.innerHTML = `
-      <h2>User Details</h2>
-      <p>User Name: ${userDetails.UserName}</p>
-      <p>User Email: ${userDetails.UserEmail}</p>
-      <p>Contact: ${userDetails.Contact}</p>
-      <p>Role: ${userDetails.Role}</p>
-      <p>Status: ${userDetails.Status}</p>
-      <p>Description: ${userDetails.Description}</p>
-      <p>Mobile Number: ${userDetails.MobileNumber}</p>
+      <h2>Mosjid Details</h2>
+     
+      <p>ID:${userDetails.IdMosque}</p>
+      <p> Mosjid Name:${userDetails.MosqueName}</p>
+      <p>City:${userDetails.city}</p>
+      <p>Description:${userDetails.Description}</p>
+      <p>capacity:${userDetails.Capacity}</p>
+      <p>Fazar :${userDetails.Fazarn}</p>
+      <p>Zuhar${userDetails.Zuhur}</p>
+      <p>Asor:${userDetails.Asor}</p>
+      <p>Magrib Time:${userDetails.magrib}</p>
+      <p>Esha:${userDetails.esha}</p>
+      <p>Jummah:${userDetails.Jummah}</p>
+      <p>Announcemnny:${userDetails.Announcement}</p>
     `;
   } else {
     userDetailsDiv.innerHTML = '<p>Error fetching user details.</p>';
@@ -101,13 +108,13 @@ async function displayUserDetails() {
 }
 
 async function deleteUser() {
-    await fetch(`http://localhost:3000/user/delete/${userId}`, { method: 'DELETE' })
+    await fetch(`http://localhost:3000/mosjid/delete/${userId}`, { method: 'DELETE' })
         .then(response => response.json())
         .then(data => {
           if (data.success) {
             alert('Admin deleted successfully.');
             // Redirect to the admin dashboard page
-            window.location.href = '/adminhome.html';
+            window.location.href = '/viewMosjid.html';
           } else {
             alert('Failed to delete admin.');
           }
@@ -115,7 +122,7 @@ async function deleteUser() {
         .catch(error => {
           console.error(error);
           alert('Admin deleted successfully.');
-          window.location.href = '/adminhome.html';
+          window.location.href = 'View\Mosjid\Viewmosjid.html';
           
         });
   alert(`Delete user with userId: ${userId}`);

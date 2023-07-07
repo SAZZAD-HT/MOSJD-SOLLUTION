@@ -30,9 +30,14 @@ async Allannouncement(): Promise<Announcemententity[]>{
   return data;
 }
 
-async create(announcement: AnnouncemetDto ): Promise<Announcemententity> {
-  return await this.anny.save(announcement);}
+async updateStatus(id: number, user: annch): Promise<void> {
+  await this.anny.update(id, user);
+}
+async create(announcement: AnnouncemetDto): Promise<Announcemententity> {
+  return await this.anny.save(announcement);
+}
   
  
 }
+
 
