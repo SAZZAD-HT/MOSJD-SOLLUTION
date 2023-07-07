@@ -77,7 +77,8 @@ export class UserController {
     const user = await this.userService.signin(body. UserEmail, body. UserPassword);
 
     session.userId =2565 ;
-    console.log(session.userId);
+    //console.log(session.userId);
+    console.log(user.Role);
     return user;
   }
   

@@ -41,6 +41,8 @@ export class Mosque {
 
   @Column()
   Announcement: string;
+  @Column()
+  DonationId: number;
 
  
 }

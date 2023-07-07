@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mosjid Management</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(39, 141, 141);
+    }
+
+    h1, h2 {
+      color: #333;
+      text-decoration: underline;
+    }.header {
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .header .sign-out {
+      color: #1bd6a7;
+      text-decoration: none;
+    }
+
+    .header .mosjid-button {
+      background: red;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .header .mosjid-button:hover {
+      background: #cc0000;
+    }
+    
+    .header .user-button {
+      background: red;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .header .user-button:hover {
+      background: #cc0000;
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: #e7e2e2;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 5px;
+      width: 200px;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+      .error-message {
+          display: none;
+          background-color: #f44336;
+          color: #fff;
+          padding: 10px;
+          border-radius: 4px;
+          margin-top: 10px;
+      }
+      
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      animation: fadeInButton 1s ease;
+    }
+
+    /* Define the animation */
+    @keyframes fadeInButton {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Create Annnouncement</h1>
+   
+    
+    <a class="user-button" href="../User.html">User</a>
+  
+  </div>
+
+
+
+<ul id="adminsList"></ul>
+<form  onsubmit="event.preventDefault(); createAdmin()">
+    <label for="IdAnnouncement">IdAnnouncement</label>
+    <input type="number" id="MosqueID" required>
+    <label for="MosqueName">Announcement</label>
+    <input type="text" id="MosqueName" required>
+    <br>
+    <label for="MLocation">AnnouncementDate:</label>
+    <input type="text" id="MLocation" required>
+    <br>
+    
+    <br>
+    <button type="submit" > Create Mosque</button>
+  </form>
+  
+ 
+
+
+
+<script>
+    const queryParams = new URLSearchParams(window.location.search);
+const userId = queryParams.get('userId');
+const baseURL = 'http://localhost:3000/Announcement'; // Replace with your API base URL
+
+function sendRequest(method, url, data = null) {
+  return new Promise((resolve, reject) => {
+    axios({
+      method: method,
+      url: url,
+      data: data,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        resolve(response.data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+}
+
+
+
+   
+
+// Create admin
+function createAdmin() {
+    const IdAnnouncement = document.getElementById('MosqueID').value;
+    const Announcement= document.getElementById('MosqueName').value;
+  const AnnouncementDate = document.getElementById('MLocation').value;
+ 
+  const data = {
+    IdAnnouncement:IdAnnouncement,
+    Announcement: Announcement,
+    AnnouncementDate:AnnouncementDate,
+    AnnouncemnentStaus:"NotApproved",
+    createdby:"USER"
+
+
+    
+  };
+  console.log(data);
+  
+  const url = `${baseURL}/create`;
+  sendRequest('POST', url, data)
+    .then(response => {
+      console.log(response);
+      console.log("Announcement ADDED successfully");
+      alert('Announcement ADDED successfully!');
+    })
+    .catch(error => {
+      console.error(error);
+      console.log("Failed to create admin");
+      alert(error.response.data.message); 
+    });if (response.ok) {
+      alert('Admin registered successfully!');
+      window.location.href = '/adminHome.html';
+     
+      registerForm.reset();
+    } else {
+      alert('Failed to register admin!'); alert('Failed to register admin!');
+    }
+}
+// Get admin by ID
+
+// Update admin by ID
+
+
+
+</script>
+</body>
+</html>

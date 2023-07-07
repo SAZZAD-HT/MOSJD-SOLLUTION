@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <style>
+    /* Default styles */
+ 
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .header {
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .header .sign-out {
+      color: #1bd6a7;
+      text-decoration: none;
+    }
+
+    .header .mosjid-button {
+      background: red;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .header .mosjid-button:hover {
+      background: #cc0000;
+    }
+    
+    .header .user-button {
+      background: red;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .header .user-button:hover {
+      background: #cc0000;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .sidebar {
+      width: 200px;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar li a {
+      color: #333;
+      text-decoration: none;
+    }
+
+    .sidebar li a:hover {
+      color: #000;
+      font-weight: bold;
+    }
+
+    .content-area {
+      flex: 1;
+      padding: 20px;
+    }.content-area .action-buttons:hover {
+      background: #1b1a1a;
+    }
+    
+    .content-area .action-buttons {
+      background: rgb(94, 28, 168);
+      color: #ddd7d7;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table th {
+  background-color: #f2f2f2;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.actions button {
+  margin-right: 5px;
+}
+
+    /.center-container {
+  text-align: center;
+}
+
+.center-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Mosjid</h1>
+   
+    <a class="sign-out" href="#" onclick="signOut()">Sign Out</a>
+  </div>
+  
+  
+     
+    <div class="content-area">
+        <div class="action-buttons">
+          <button onclick="Annnouncement()">Annnouncement</button>
+          <button onclick="Annnouncementreq()">Announcement request</button>
+          <button onclick="bookimam()">BookImamReques</button>
+          <button onclick="salatTime()">SALAt Time set</button>
+          <button onclick="Donate()">Donate</button>
+          <button onclick="Alquran()">Al-Quran</button>
+          <button onclick="updateMosjid()">BeingMumin</button>
+        </div><div class="center-container">
+            <h1>NO Mosjid Profile Then create One</h1>
+            <h3>In here You can add Your Details Of Mosjid .You can set your namaz Time.Will have Your Donation Profil and many More</h3>
+            <button class="center-button" onclick="newpage()">Create An Mosjid Profile</button>
+          </div>
+
+        
+          
+  
+
+  <script>
+    function newpage() {
+      // Handle fetch data functionality here
+      window.location.href = "./addMosjid.html";
+    }
+   function signOut() {
+      // Handle sign out functionality here
+      alert('Signing out...');
+      window.location.href = "./index.html";
+    }
+
+    function Annnouncement() {
+      // Handle add user functionality here
+      alert('Adding user...');
+      window.location.href = "./Announcement.html";
+    }
+
+    function Annnouncementreq() {
+      window.location.href = `./ApproveAnnoucement.html`;
+
+    }
+
+    function bookimam() {
+      // Handle add Mosjid functionality here
+      window.location.href = `./ApproveBooking.html`;
+    }
+
+    function salatTime() {
+      // Handle remove Mosjid functionality here
+      window.location.href = "./Namaztime.html";
+    }
+
+    function Donate() {
+      
+      window.location.href = "./Donation.html";
+    }
+
+    function uAlqurand() {
+      // Handle update Mosjid functionality here
+      alert('Working on it...');
+    }
+   
+
+
+
+// Call displayData to fetch and show data when the page loads
+displayData();
+  </script>
+</body>
+</html>

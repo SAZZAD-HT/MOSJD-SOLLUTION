@@ -14,6 +14,7 @@ import { BookingServices } from '../Services/BookingServices';
 import { AnnouncmentService } from '../Services/AnnouncmentService';
 import { BookingController } from 'src/Bookings.Controller';
 import { AnnouncmentController } from 'src/Announcement.controller';
+import { Donationentity } from '../Entity/DonationEntity';
 
 
 @Module({
@@ -28,7 +29,7 @@ import { AnnouncmentController } from 'src/Announcement.controller';
         //entities: [Mosque,User,UserBookings,BookingMosque,Announcemententity],
         autoLoadEntities: true,
         synchronize: false,
-	}),TypeOrmModule.forFeature([BookingMosque,Mosque,User,UserBookings,Announcemententity])
+	}),TypeOrmModule.forFeature([BookingMosque,Mosque,User,UserBookings,Announcemententity,Donationentity])
 	],
   providers: [UserService,OthersServices,MosjidService,BookingServices,AnnouncmentService],
   controllers: [UserController,MosjidController,BookingController,AnnouncmentController ]

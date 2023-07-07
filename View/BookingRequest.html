@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mosjid Management</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(39, 141, 141);
+    }
+
+    h1, h2 {
+      color: #333;
+      text-decoration: underline;
+    }.header {
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .header .sign-out {
+      color: #1bd6a7;
+      text-decoration: none;
+    }
+
+    .header .mosjid-button {
+      background: red;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .header .mosjid-button:hover {
+      background: #cc0000;
+    }
+    
+    .header .user-button {
+      background: red;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .header .user-button:hover {
+      background: #cc0000;
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: #e7e2e2;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 5px;
+      width: 200px;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+      .error-message {
+          display: none;
+          background-color: #f44336;
+          color: #fff;
+          padding: 10px;
+          border-radius: 4px;
+          margin-top: 10px;
+      }
+      
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      animation: fadeInButton 1s ease;
+    }
+
+    /* Define the animation */
+    @keyframes fadeInButton {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Booking</h1>
+   
+    
+    <a class="user-button" href="../User.html">User</a>
+  
+  </div>
+
+
+
+<ul id="adminsList"></ul>
+<form onsubmit="event.preventDefault(); createAdmin() ">
+    <label for="MosqueName">Booking ID :</label>
+    <input type="number" id="MosqueID" required>
+    <label for="MosqueName">BookingTime</label>
+    <input type="text" id="MosqueName" required>
+    <br>
+    <label for="MLocation">BookingDate</label>
+    <input type="text" id="MLocation" required>
+    <br>
+    <label for="city">BoookingDuration in Hours:</label>
+    <input type="text" id="city" required>
+    <br>
+    <label for="Description">Booked  BY Imam /User</label>
+    <input type="text" id="Description" required>
+    <br>
+    <label for="Capacity">Booking FO</label>
+    <input type="text" id="Capacity" required>
+    <br>
+   
+    <button type="submit">Create Mosque</button>
+  </form>
+  
+  <!-- <h2>Delete Mosque by ID</h2>
+  <form onsubmit="event.preventDefault(); deleteMosqueById()">
+    <label for="mosqueIdToDelete">Mosque ID:</label>
+    <input type="number" id="mosqueIdToDelete" required>
+    <br>
+    <button type="submit">Delete Mosque</button>
+  </form>
+  
+  <h2>Update Mosque by ID</h2>
+  <form onsubmit="event.preventDefault(); updateMosqueById()">
+    <label for="mosqueIdToUpdate">Mosque ID:</label>
+    <input type="number" id="mosqueIdToUpdate" required>
+    <br>
+    <label for="MosqueName">Mosque Name:</label>
+    <input type="text" id="MosqueName" required>
+    <br>
+    <label for="MLocation">Location:</label>
+    <input type="text" id="MLocation" required>
+    <br>
+    <label for="city">City:</label>
+    <input type="text" id="city" required>
+    <br>
+    <label for="Description">Description:</label>
+    <input type="text" id="Description" required>
+    <br>
+    <label for="Capacity">Capacity:</label>
+    <input type="text" id="Capacity" required>
+    <br>
+    <label for="Fazar">Fazar:</label>
+    <input type="text" id="Fazar" required>
+    <br>
+    <label for="Zuhur">Zuhur:</label>
+    <input type="text" id="Zuhur" required>
+    <br>
+    <label for="Asor">Asor:</label>
+    <input type="text" id="Asor" required>
+    <br>
+    <label for="magrib">Magrib:</label>
+    <input type="text" id="magrib" required>
+    <br>
+    <label for="esha">Esha:</label>
+    <input type="text" id="esha" required>
+    <br>
+    <label for="Jummah">Jummah:</label>
+    <input type="text" id="Jummah" required>
+    <br>
+    <label for="Announcement">Announcement:</label>
+    <input type="text" id="Announcement" required>
+    <br>
+    <button type="submit">Update Mosque</button>
+  </form> -->
+  
+
+<!-- <h2>Delete Admin by ID</h2>
+<form onsubmit="event.preventDefault(); deleteAdminById()">
+  <label for="adminIdToDelete">Admin ID:</label>
+  <input type="number" id="adminIdToDelete" required>
+  <br>
+  <button type="submit">Delete Admin</button>
+</form> -->
+
+<!-- <h2>Update Admin by ID</h2>
+<form onsubmit="event.preventDefault(); updateAdminById()">
+  <label for="UseName">UseName:</label>
+  <input type="text" id="UseName" >
+  <br>
+  <label for="userId">User ID:</label>
+  <input type="number" id="userId" required>
+  <br>
+  <label for="UserEmail">User Email:</label>
+  <input type="email" id="UserEmail" >
+  <br>
+  <label for="UserUserPassword">User Password:</label>
+  <input type="password" id="UserUserPassword" >
+  <br>
+  <label for="Contact">Contact:</label>
+  <input type="text" id="Contact" >
+  <br>
+  <br>
+  <label for="Role">Role:</label>
+  <input type="text" id="userRole" >
+  <br>
+  <br>
+  <label for="status">Status:</label>
+  <select id="status" name="status">
+    <option value="Active">Active</option>
+    <option value="Inactive">Inactive</option>
+  </select>
+  <br>
+  <button type="submit">Update Admin</button>
+</form>
+<h1>Mosque Management</h1>
+<button onclick="getAllAdmins2()">Get All Mosque</button>
+<ul id="adminsList2"></ul> -->
+
+
+
+<script>
+const baseURL = 'http://localhost:3000/booking'; // Replace with your API base URL
+
+function sendRequest(method, url, data = null) {
+  return new Promise((resolve, reject) => {
+    axios({
+      method: method,
+      url: url,
+      data: data,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        resolve(response.data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+}
+
+
+// Create admin
+function createAdmin() {
+    const IDMosque = document.getElementById('MosqueID').value;
+    const mosqueName = document.getElementById('MosqueName').value;
+  const location = document.getElementById('MLocation').value;
+  const city = document.getElementById('city').value;
+  const description = document.getElementById('Description').value;
+  const capacity = document.getElementById('Capacity').value;
+  
+  const data = {
+    MBookingId: IDMosque,
+    BookingTime: mosqueName,
+    BookingDate: location,
+    BoookingDuration: city,
+    Bookedby: description,
+    BookingStatus: "PENDING",
+
+    BookingType: capacity,
+    
+  };
+  console.log(data);
+  
+  const url = `${baseURL}/create`;
+  sendRequest('POST', url, data)
+    .then(response => {
+      console.log(response);
+      console.log("Admin created successfully");
+      alert('Admin registered successfully!');
+    })
+    .catch(error => {
+      console.error(error);
+      console.log("Failed to create admin");
+      alert(error.response.data.message); 
+    });if (response.ok) {
+      alert('Admin registered successfully!');
+      window.location.href = '/adminHome.html';
+     
+      registerForm.reset();
+    } else {
+      alert('Failed to register admin!'); alert('Failed to register admin!');
+    }
+}
+// Get admin by ID
+
+// Update admin by ID
+function updateAdminById() {
+  const adminId = document.getElementById('adminIdToUpdate').value;
+  const UseName = document.getElementById('UseName').value;
+  const userId = document.getElementById('userId').value;
+  const email = document.getElementById('UserEmail').value;
+  const UserPassword = document.getElementById('UserUserPassword').value;
+  const Role = document.getElementById('userRole').value;
+  const status = document.getElementById('status').value;
+  const Contact = document.getElementById('Contact').value;
+  const data = { UseName, userId, email, UserPassword, Role, status, Contact };
+
+  const url = `${baseURL}/update/${adminId}`;
+  sendRequest('PUT', url, data)
+    .then(response => {
+      console.log(response);
+        displaySuccessMessage("Updated");
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle the error
+    });
+}
+
+</script>
+</body>
+</html>

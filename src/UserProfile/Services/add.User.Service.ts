@@ -45,17 +45,36 @@ export class UserService {
         return await this.userRepo.findOneBy({UserPassword});
     }
     async signin(email: string, password: string) {
-        const user = await this.findemail(email);
-        if (!user) {
-            console.log("User not found");
-            throw new NotFoundException('User not found');
+        
+        
+            const user = await this.findemail(email);
+            if (!user) {
+                console.log("User not found");
+                throw new NotFoundException('User not found');
+            }
+            if (user.UserPassword !== password) {
+                
+                console.log("Invalid password");
+                throw new BadRequestException('Invalid password');
+            }
+            if(user.Role=="admin"){
+                
+                
+                console.log("admin");
+                return user;
+            }else if(user.Role=="user"){
+               
+    
+                console.log("user");
+                return user;}
+                else if(user.Role=="mosjid"){
+               
+    
+                    console.log("mosjid");
+                    return user;}
+    
+            ;
+    
         }
-        if (user.UserPassword !== password) {
-            console.log("Invalid password");
-            throw new BadRequestException('Invalid password');
-        }
-
-        return user;
 
     }
-}

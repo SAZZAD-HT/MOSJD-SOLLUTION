@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Management</title>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .error-message {
+          display: none;
+          background-color: #f44336;
+          color: #fff;
+          padding: 10px;
+          border-radius: 4px;
+          margin-top: 10px;
+      }
+
+    h1, h2 {
+      color: #333;
+      text-decoration: underline;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f2f2f2;
+      padding: 10px;
+    }
+
+    .header-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      transition-duration: 0.4s;
+    }
+
+    .header-button:hover {
+      background-color: #45a049;
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 5px;
+      width: 200px;
+    }
+
+    button[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Admin Management</h1>
+        <div>
+          <button class="header-button" href="Profile.html">Profile</button>
+          <button class="header-button" onclick="showUserOperations()">User</button>
+        </div>
+      </div>
+
+
+<button onclick="getAllAdmins()">Get All Admins</button>
+<ul id="adminsList"></ul>
+
+
+<h1>Mosque Management</h1>
+<button onclick="getAllAdmins2()">Get All Mosque</button>
+<ul id="adminsList2"></ul>
+
+
+<h2>Create Mosque</h2>
+<form onsubmit="event.preventDefault(); createMosque()">
+  <label for="MosqueName">Mosque Name:</label>
+  <input type="text" id="MosqueName" required>
+  <br>
+  <label for="MLocation">Location:</label>
+  <input type="text" id="MLocation" required>
+  <br>
+  <label for="city">City:</label>
+  <input type="text" id="city" required>
+  <br>
+  <label for="Description">Description:</label>
+  <input type="text" id="Description" required>
+  <br>
+  <label for="Capacity">Capacity:</label>
+  <input type="text" id="Capacity" required>
+  <br>
+  <label for="Fazar">Fazar:</label>
+  <input type="text" id="Fazar" required>
+  <br>
+  <label for="Zuhur">Zuhur:</label>
+  <input type="text" id="Zuhur" required>
+  <br>
+  <label for="Asor">Asor:</label>
+  <input type="text" id="Asor" required>
+  <br>
+  <label for="magrib">Magrib:</label>
+  <input type="text" id="magrib" required>
+  <br>
+  <label for="esha">Esha:</label>
+  <input type="text" id="esha" required>
+  <br>
+  <label for="Jummah">Jummah:</label>
+  <input type="text" id="Jummah" required>
+  <br>
+  <label for="Announcement">Announcement:</label>
+  <input type="text" id="Announcement" required>
+  <br>
+  <button type="submit">Create Mosque</button>
+</form>
+
+<h2>Delete Mosque by ID</h2>
+<form onsubmit="event.preventDefault(); deleteMosqueById()">
+  <label for="mosqueIdToDelete">Mosque ID:</label>
+  <input type="number" id="mosqueIdToDelete" required>
+  <br>
+  <button type="submit">Delete Mosque</button>
+</form>
+
+<h2>Update Mosque by ID</h2>
+<form onsubmit="event.preventDefault(); updateMosqueById()">
+  <label for="mosqueIdToUpdate">Mosque ID:</label>
+  <input type="number" id="mosqueIdToUpdate" required>
+  <br>
+  <label for="MosqueName">Mosque Name:</label>
+  <input type="text" id="MosqueName" required>
+  <br>
+  <label for="MLocation">Location:</label>
+  <input type="text" id="MLocation" required>
+  <br>
+  <label for="city">City:</label>
+  <input type="text" id="city" required>
+  <br>
+  <label for="Description">Description:</label>
+  <input type="text" id="Description" required>
+  <br>
+  <label for="Capacity">Capacity:</label>
+  <input type="text" id="Capacity" required>
+  <br>
+  <label for="Fazar">Fazar:</label>
+  <input type="text" id="Fazar" required>
+  <br>
+  <label for="Zuhur">Zuhur:</label>
+  <input type="text" id="Zuhur" required>
+  <br>
+  <label for="Asor">Asor:</label>
+  <input type="text" id="Asor" required>
+  <br>
+  <label for="magrib">Magrib:</label>
+  <input type="text" id="magrib" required>
+  <br>
+  <label for="esha">Esha:</label>
+  <input type="text" id="esha" required>
+  <br>
+  <label for="Jummah">Jummah:</label>
+  <input type="text" id="Jummah" required>
+  <br>
+  <label for="Announcement">Announcement:</label>
+  <input type="text" id="Announcement" required>
+  <br>
+  <button type="submit">Update Mosque</button>
+</form>
+
+<script>
+const baseURL = 'http://localhost:3000/user'; // Replace with your API base URL
+function showMosjidOperations() {
+    const mosqueOperations = document.getElementById('mosjidOperations');
+    const userOperations = document.getElementById('userOperations');
+    mosqueOperations.style.display = 'block';
+    userOperations.style.display = 'none';
+  }
+
+  function showUserOperations() {
+    const mosqueOperations = document.getElementById('mosjidOperations');
+    const userOperations = document.getElementById('userOperations');
+    mosqueOperations.style.display = 'none';
+    userOperations.style.display = 'block';
+  }
+
+function sendRequest(method, url, data = null) {
+  return new Promise((resolve, reject) => {
+    axios({
+      method: method,
+      url: url,
+      data: data,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        resolve(response.data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+}
+
+// Get all admins
+function getAllAdmins() {
+  const url = `${baseURL}`;
+  sendRequest('GET', url)
+    .then(response => {
+      console.log(response);
+      // Handle the response data
+      const adminsList = document.getElementById('adminsList');
+      adminsList.innerHTML = ''; // Clear the existing list
+
+      const jsonData = JSON.stringify(response, null, 2); // Convert response to JSON string with indentation
+      const listItem = document.createElement('li');
+      listItem.textContent = jsonData;
+      adminsList.appendChild(listItem);
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle the error
+    });
+}
+
+// Create admin
+function createAdmin() {
+  const UseName = document.getElementById('UseName').value;
+  const userId = document.getElementById('userId').value;
+    const UserEmail = document.getElementById('UserEmail').value;
+  const UserPassword = document.getElementById('UserUserPassword').value;
+  const Role = document.getElementById('userRole').value;
+  const status = document.getElementById('status').value;
+  const Contact = document.getElementById('Contact').value;
+    const data = {  UserId,UseName, UserEmail, UserPassword,Contact , Role, status};
+    console.log(data);
+  const url = `${baseURL}/create`;
+  sendRequest('POST', url, data)
+    .then(response => {
+      console.log(response);
+      // Handle the response data
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle the error
+    });
+}
+
+// Get admin by ID
+function getAdminById() {
+  const adminId = document.getElementById('adminId').value;
+  const url = `${baseURL}/getadmin/${adminId}`;
+  sendRequest('GET', url)
+    .then(response => {
+      console.log(response);
+      // Handle the response data
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle the error
+    });
+}
+
+// Delete admin by ID
+function deleteAdminById() {
+  const adminId = document.getElementById('adminIdToDelete').value;
+  const url = `${baseURL}/delete/${adminId}`;
+  sendRequest('DELETE', url)
+    .then(response => {
+      console.log(response);
+      // Handle the response data
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle the error
+    });
+}
+
+// Update admin by ID
+function updateAdminById() {
+  const adminId = document.getElementById('adminIdToUpdate').value;
+  const UseName = document.getElementById('UseName').value;
+  const userId = document.getElementById('userId').value;
+  const email = document.getElementById('UserEmail').value;
+  const UserPassword = document.getElementById('UserUserPassword').value;
+  const Role = document.getElementById('userRole').value;
+  const status = document.getElementById('status').value;
+  const Contact = document.getElementById('Contact').value;
+  const data = { UseName, userId, email, UserPassword, Role, status, Contact };
+
+  const url = `${baseURL}/update/${adminId}`;
+  sendRequest('PUT', url, data)
+    .then(response => {
+      console.log(response);
+      // Handle the response data
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle the error
+    });
+}
+function displayErrorMessage(message) {
+        var errorMessage = document.getElementById("error-message");
+        errorMessage.innerText = message;
+        errorMessage.style.display = "block";
+    }
+
+    function displaySuccessMessage(message) {
+        alert(message);
+    }
+const baseURL2 = 'http://localhost:3000/user/Mosjid'; // Replace with your API base URL
+function getAllAdmins2() {
+  const url = `${baseURL2}`;
+  sendRequest('GET', url)
+    .then(response => {
+      console.log(response);
+      // Handle the response data
+      const adminsList = document.getElementById('adminsList2');
+      adminsList2.innerHTML = ''; // Clear the existing list
+
+      const jsonData = JSON.stringify(response, null, 2); // Convert response to JSON string with indentation
+      const listItem = document.createElement('li');
+      listItem.textContent = jsonData;
+      adminsList.appendChild(listItem);
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle the error
+    });
+}
+function sendRequest(method, url, data = null) {
+  return new Promise((resolve, reject) => {
+    axios({
+      method: method,
+      url: url,
+      data: data,
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(response => {
+        resolve(response.data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+}
+
+// Create mosque
+function createMosque() {
+  const mosqueName = document.getElementById('MosqueName').value;
+  const location = document.getElementById('MLocation').value;
+  const city = document.getElementById('city').value;
+  const description = document.getElementById('Description').value;
+  const capacity = document.getElementById('Capacity').value;
+  const fazar = document.getElementById('Fazar').value;
+  const zuhur = document.getElementById('Zuhur').value;
+  const asor = document.getElementById('Asor').value;
+  const magrib = document.getElementById('magrib').value;
+  const esha = document.getElementById('esha').value;
+  const jummah = document.getElementById('Jummah').value;
+  const announcement = document.getElementById('Announcement').value;
+  const data = {
+    MosqueName: mosqueName,
+    MLocation: location,
+    city: city,
+    Description: description,
+    Capacity: capacity,
+    Fazar: fazar,
+    Zuhur: zuhur,
+    Asor: asor,
+    magrib: magrib,
+    esha: esha,
+    Jummah: jummah,
+    Announcement: announcement
+  };
+
+  const url = `${baseURL2}/create`;
+  sendRequest('POST', url, data)
+    .then(response => {
+      console.log(response);
+      displaySuccessMessage("Mosque created successfully");
+    })
+    .catch(error => {
+      console.error(error);
+      displayErrorMessage("Failed to create mosque");
+    });
+}
+
+// Delete mosque by ID
+function deleteMosqueById() {
+  const mosqueId = document.getElementById('mosqueIdToDelete').value;
+  const url = `${baseURL2}/delete/${mosqueId}`;
+  sendRequest('DELETE', url)
+    .then(response => {
+        displaySuccessMessage("Deleted")
+      // Handle the response data
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle the error
+    });
+}
+
+// Update mosque by ID
+function updateMosqueById() {
+  const mosqueId = document.getElementById('mosqueIdToUpdate').value;
+  const mosqueName = document.getElementById('MosqueName').value;
+  const location = document.getElementById('MLocation').value;
+  const city = document.getElementById('city').value;
+  const description = document.getElementById('Description').value;
+  const capacity = document.getElementById('Capacity').value;
+  const fazar = document.getElementById('Fazar').value;
+  const zuhur = document.getElementById('Zuhur').value;
+  const asor = document.getElementById('Asor').value;
+  const magrib = document.getElementById('magrib').value;
+  const esha = document.getElementById('esha').value;
+  const jummah = document.getElementById('Jummah').value;
+  const announcement = document.getElementById('Announcement').value;
+  const data = {
+    MosqueName: mosqueName,
+    MLocation: location,
+    city: city,
+    Description: description,
+    Capacity: capacity,
+    Fazar: fazar,
+    Zuhur: zuhur,
+    Asor: asor,
+    magrib: magrib,
+    esha: esha,
+    Jummah: jummah,
+    Announcement: announcement
+  };
+
+  const url = `${baseURL2}/update/${mosqueId}`;
+  sendRequest('PUT', url, data)
+    .then(response => {
+      console.log(response);
+      displaySuccessMessage("Updated");a
+    })
+    .catch(error => {
+      console.error(error);
+      // Handle the error
+    });
+}
+</script>
+</body>
+</html>

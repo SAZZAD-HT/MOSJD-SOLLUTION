@@ -50,6 +50,8 @@ export class AddMosjidDto {
     @IsNotEmpty()
     @IsString()
     Announcement: string;
+    
+    
   
 
 }
