@@ -5,25 +5,27 @@ import { BookingMosque } from '../Entity/Booking.Mosque.Entity';
 import { Mosque } from '../Entity/Mosque.entity';
 import { Announcemententity } from '../Entity/Announcementen';
 import { AnnouncemetDto, annch } from '../Dto/ann.dto';
+import { retry } from 'rxjs';
 
 
 @Injectable()
 export class AnnouncmentService {
   constructor(
-    @InjectRepository(Mosque)
+    @InjectRepository(Announcemententity)
     private readonly anny: Repository<Announcemententity>
   ) {}
 
 
-  async createdbyadmin( createdby: string,AnnouncemnentStaus:string): Promise<Announcemententity> {
+  async createdbyadmin( createdby: string,AnnouncemnentStaus:string): Promise<Announcemententity[]> {
     
     
     
-    return await this.anny.findOne({where:[
+    var data= await this.anny.find({where:[
       {createdby: 'ADMIN'},
       {AnnouncemnentStaus: 'ACTIVE' },
     ],
   });
+  return data;
 }
 async Allannouncement(): Promise<Announcemententity[]>{
   var data=await this.anny.find();

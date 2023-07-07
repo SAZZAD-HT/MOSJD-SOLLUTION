@@ -15,7 +15,40 @@ export class BookingController {
     constructor(private readonly Booking:BookingServices,
          ) {}
     
-   
+         @Get('/App')
+         async getMosjidApprovals(): Promise<BookingMosque[] > {
+           console.log('getMosjidApprovals');
+             try {
+               const booking = await this.Booking.ForMosjidApprove('USER', 'PENDING');
+               return booking ;
+             } catch (error) {
+               // Handle any errors that occurred during the retrieval process
+               console.error('Error retrieving mosque approvals:', error);
+               return error;
+             }
+           }
+           @Post('/change') // Replace '/status-change' with the actual endpoint path for changing booking status
+           async changeBookingStatus(@Body() booked: BookingMosque): Promise<BookingMosque | null> {
+             try {
+               const updatedBooking = await this.Booking.bstauschange(booked);
+               return updatedBooking ;
+             } catch (error) {
+               // Handle any errors that occurred during the update process
+               console.error('Error changing booking status:', error);
+               return null;
+             }
+           }
+           @Get('/confirmed') // Replace '/confirmed' with the actual endpoint path for retrieving confirmed bookings
+           async getConfirmedBookings(): Promise<BookingMosque | null> {
+             try {
+               const booking = await this.Booking.BoookingConfirmed('CONFIRMED');
+               return booking ;
+             } catch (error) {
+               // Handle any errors that occurred during the retrieval process
+               console.error('Error retrieving confirmed bookings:', error);
+               return null;
+             }
+           }
     @Get()
     async findAll(): Promise<BookingMosque[]> {
         return await this.Booking.Findbooked();
@@ -29,39 +62,7 @@ export class BookingController {
     async create(@Body() booking: BookingMosque): Promise<BookingMosque> {
         return await this.Booking.create(booking);
     }
-    @Get('Approval')
-    async getMosjidApprovals(): Promise<BookingMosque | null> {
-        try {
-          const booking = await this.Booking.ForMosjidApprove('USER', 'PENDING');
-          return booking || null;
-        } catch (error) {
-          // Handle any errors that occurred during the retrieval process
-          console.error('Error retrieving mosque approvals:', error);
-          return null;
-        }
-      }
-      @Post('/change') // Replace '/status-change' with the actual endpoint path for changing booking status
-      async changeBookingStatus(@Body() booked: BookingMosque): Promise<BookingMosque | null> {
-        try {
-          const updatedBooking = await this.Booking.bstauschange(booked);
-          return updatedBooking ;
-        } catch (error) {
-          // Handle any errors that occurred during the update process
-          console.error('Error changing booking status:', error);
-          return null;
-        }
-      }
-      @Get('/confirmed') // Replace '/confirmed' with the actual endpoint path for retrieving confirmed bookings
-      async getConfirmedBookings(): Promise<BookingMosque | null> {
-        try {
-          const booking = await this.Booking.BoookingConfirmed('CONFIRMED');
-          return booking ;
-        } catch (error) {
-          // Handle any errors that occurred during the retrieval process
-          console.error('Error retrieving confirmed bookings:', error);
-          return null;
-        }
-      }
+    
     }
   
   

@@ -12,6 +12,8 @@ import { MosjidController } from 'src/Mosque/Mosquecntroller';
 import { Announcemententity } from '../Entity/Announcementen';
 import { BookingServices } from '../Services/BookingServices';
 import { AnnouncmentService } from '../Services/AnnouncmentService';
+import { BookingController } from 'src/Bookings.Controller';
+import { AnnouncmentController } from 'src/Announcement.controller';
 
 
 @Module({
@@ -29,7 +31,7 @@ import { AnnouncmentService } from '../Services/AnnouncmentService';
 	}),TypeOrmModule.forFeature([BookingMosque,Mosque,User,UserBookings,Announcemententity])
 	],
   providers: [UserService,OthersServices,MosjidService,BookingServices,AnnouncmentService],
-  controllers: [UserController,MosjidController ]
+  controllers: [UserController,MosjidController,BookingController,AnnouncmentController ]
 
 })
 export class DatabaseModulemosque {}

@@ -11,7 +11,7 @@ import { booked } from '../Dto/bookdto';
 @Injectable()
 export class BookingServices {
   constructor(
-    @InjectRepository(Mosque)
+    @InjectRepository(BookingMosque)
     private readonly book: Repository<BookingMosque> 
   ) {}
 
@@ -28,12 +28,14 @@ export class BookingServices {
 async create(booking: BookingMosque): Promise<BookingMosque> {
     return await this.book.save(booking);
 }
-async ForMosjidApprove(BookingType:string,BookingStatus:string): Promise<BookingMosque> {
-  return await this.book.findOne({where:[
+async ForMosjidApprove(BookingType:string,BookingStatus:string): Promise<BookingMosque[]> {
+ var val= await this.book.find({where:[
     {BookingType: 'USER'},
     {BookingStatus: 'PENDING' },
   ],
 });
+console.log(val);
+return val;
 }   
 async bstauschange(B:booked): Promise<BookingMosque> {
 
@@ -42,7 +44,7 @@ async bstauschange(B:booked): Promise<BookingMosque> {
 async BoookingConfirmed(BookingStatus:string): Promise<BookingMosque> {
     return await this.book.findOne({where:[
      
-        {BookingStatus: 'CONFIRMED' },
+        {BookingStatus: 'ACTIVE' },
        
     ],
     });

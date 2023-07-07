@@ -11,7 +11,7 @@ import { Announcemententity } from './UserProfile/Entity/Announcementen';
 import { AnnouncemetDto } from './UserProfile/Dto/ann.dto';
 
 
-@Controller('Booking')
+@Controller('Announcement')
 export class AnnouncmentController{
 
     constructor(private readonly ann:AnnouncmentService,
@@ -28,7 +28,7 @@ export class AnnouncmentController{
             return [];
           }
         }
-        @Post()
+        @Post('/create')
         async createAnnouncement(@Body() announcement: AnnouncemetDto): Promise<Announcemententity | null> {
           try {
             const newAnnouncement = await this.ann.create(announcement);
@@ -40,10 +40,10 @@ export class AnnouncmentController{
           }
         }
         @Get('/admin-created-active')
-        async getAdminCreatedActiveAnnouncement(): Promise<Announcemententity | null> {
+        async getAdminCreatedActiveAnnouncement(): Promise<Announcemententity []> {
           try {
             const announcement = await this.ann.createdbyadmin('ADMIN', 'ACTIVE');
-            return announcement || null;
+            return announcement ;
           } catch (error) {
             // Handle any errors that occurred during the retrieval process
             console.error('Error retrieving admin-created active announcement:', error);
