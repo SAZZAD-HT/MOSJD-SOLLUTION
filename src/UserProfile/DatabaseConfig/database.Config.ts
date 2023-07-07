@@ -15,6 +15,7 @@ import { AnnouncmentService } from '../Services/AnnouncmentService';
 import { BookingController } from 'src/Bookings.Controller';
 import { AnnouncmentController } from 'src/Announcement.controller';
 import { Donationentity } from '../Entity/DonationEntity';
+import { DonationController } from 'src/DonationController';
 
 
 @Module({
