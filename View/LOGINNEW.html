@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Animated Background Login Screen</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="container">
+	<div id="login-box">
+		<div class="logo">
+			<img src="http://placehold.it/100x100?text=DD" class="img img-responsive img-circle center-block"/>
+			<h1 class="logo-caption"><span class="tweak">L</span>ogin</h1>
+		</div><!-- /.logo -->
+		<div class="controls">
+			<input type="text" name="username"id="email" placeholder="Username" class="form-control" />
+			<input type="text" name="username"id="password" placeholder="Password" class="form-control" />
+			<button type="button" class="btn btn-default btn-block btn-custom" onclick="loginUser()" >Login</button>
+		</div>
+	</div>
+</div>
+<div id="particles-js"></div>
+<!-- partial -->
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css'></script>
+<script src='https://code.jquery.com/jquery-1.11.1.min.js'></script><script  src="./script.js"></script>
+<script>
+    async function loginUser() {
+      const UserEmail = document.getElementById('email').value;
+      const UserPassword = document.getElementById('password').value;
+
+      const data = {
+        UserEmail,
+        UserPassword
+      };
+
+      const response = await fetch('http://localhost:3000/user/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) { 
+        const responseData = await response.json(); // Parse the response body as JSON
+    console.log(responseData);
+             alert('Logged in successfully');
+       
+        console.log(responseData.Role+"response");
+          
+ 
+        if(responseData.Role == 'admin'){ 
+          alert('Logged in successfully'+response);
+          window.location.href = './adminHome.html'}
+        else if(responseData.Role == 'user'){
+          alert('Logged in successfully'+responseData.Role);
+          window.location.href = './user.html'
+
+        }else{
+          alert('Logged in successfully'+responseData.Role);
+          window.location.href = './userMosque.html'
+
+        }
+       
+      } else {
+        alert('Failed to log in');
+      }
+    }
+async function loginUser1() {
+    const data = {
+  UserEmail: document.getElementById('email').value,
+  UserPassword: document.getElementById('password').value,
+};
+const headers = {
+  'Content-Type': 'application/json',
+};
+
+// Add your cookie information to the headers object
+headers['Cookie'] = 'your-cookie-name=your-cookie-value'
+fetch('http://localhost:3002/user/signin', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+ 
+})
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Failed to sign in');
+    }
+  })
+  .then(data => {
+    console.log('Sign in successful:', data);
+    // Perform any further actions after successful sign in
+  })
+  .catch(error => {
+    console.error('Sign in failed:', error);
+    // Handle sign in error
+  });
+}
+  </script>
+
+</body>
+</html>
