@@ -33,5 +33,6 @@ import { AnnouncmentController } from 'src/Announcement.controller';
   providers: [UserService,OthersServices,MosjidService,BookingServices,AnnouncmentService],
   controllers: [UserController,MosjidController,BookingController,AnnouncmentController ]
 
+  
 })
 export class DatabaseModulemosque {}
