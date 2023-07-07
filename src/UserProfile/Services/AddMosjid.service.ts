@@ -2,7 +2,7 @@ import { Injectable} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { Repository } from 'typeorm'
-import { AddMosjidDto } from '../Dto/add.Mosjid.dto';
+import { AddMosjidDto, namazdto } from '../Dto/add.Mosjid.dto';
 import { Mosque } from '../Entity/Mosque.entity';
 
 @Injectable()
@@ -46,7 +46,10 @@ export class MosjidService {
         //     }
         //     return [data1];
         // }
+        async setnamazTime(id:number,namz:namazdto): Promise<void> {
+            await this.userRepo.update(id,namz);
+
         
         }
-    
+}
 

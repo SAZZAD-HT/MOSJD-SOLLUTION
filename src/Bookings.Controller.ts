@@ -27,19 +27,15 @@ export class BookingController {
                return error;
              }
            }
-           @Post('/change') // Replace '/status-change' with the actual endpoint path for changing booking status
-           async changeBookingStatus(@Body() booked: BookingMosque): Promise<BookingMosque | null> {
-             try {
-               const updatedBooking = await this.Booking.bstauschange(booked);
-               return updatedBooking ;
-             } catch (error) {
-               // Handle any errors that occurred during the update process
-               console.error('Error changing booking status:', error);
-               return null;
-             }
+          
+           @Put('/Change-status/:id')
+           async updatestatus(@Param('id', ParseIntPipe) id: number, @Body() user:BookingMosque ): Promise<void> {
+               console.log("Controller");
+       
+               await this.Booking.bstauschange(id, user);
            }
            @Get('/confirmed') // Replace '/confirmed' with the actual endpoint path for retrieving confirmed bookings
-           async getConfirmedBookings(): Promise<BookingMosque | null> {
+           async getConfirmedBookings(): Promise<BookingMosque []> {
              try {
                const booking = await this.Booking.BoookingConfirmed('CONFIRMED');
                return booking ;
@@ -61,6 +57,10 @@ export class BookingController {
     @Post('/create')
     async create(@Body() booking: BookingMosque): Promise<BookingMosque> {
         return await this.Booking.create(booking);
+    }
+    @Delete('/delete/:id')
+    async delete(@Param('id', ParseIntPipe) UserId: number): Promise<void> {
+        await this.Booking.delete(UserId);
     }
     
     }

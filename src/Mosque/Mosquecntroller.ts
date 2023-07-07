@@ -40,6 +40,11 @@ export class MosjidController {
      var data=await this.MosjidService.findOne(userId);
      return data;
   }
+  @Put('/setnamazTime/:id')
+  async setnamazTime(@Param('id', ParseIntPipe) id: number, @Body() user: Mosque): Promise<void> {
+      console.log("Controller");
+    var dr=  await this.MosjidService.mupdate(id, user);
+    return dr;}
 
   }
   

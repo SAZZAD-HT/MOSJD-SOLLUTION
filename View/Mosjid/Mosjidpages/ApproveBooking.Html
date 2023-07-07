@@ -68,11 +68,15 @@
     <thead>
       <tr>
         <th>Serial</th>
-        <th>Announcement Id</th>
-        <th>Annnouncement</th>
-        <th>AnnouncementDate</th>
-        <th>createdby</th>
-        <th>Annnouncement Status</th>
+        <th>Mosid id</th>
+        <th>Bookinng For</th>
+        <th>Booking Date</th>
+        <th>Bookinng Time </th>
+        <th> BoookingDuration</th>
+        <th>Bookedby </th>
+        <th>Staus </th>
+        <th>Actions</th>
+       
       </tr>
     </thead>
     <tbody>
@@ -81,7 +85,10 @@
   </table>
 
   <script >
-    const apiUrl = 'http://localhost:3000/Announcement';
+     function refreshPage() {
+    location.reload();
+  }
+    const apiUrl = 'http://localhost:3000/Booking';
 const tableBody = document.querySelector('tbody');
 
 async function fetchData() {
@@ -103,14 +110,17 @@ async function displayData() {
     const row = document.createElement('tr');
     row.innerHTML = `
     <td>${index + 1}</td>
-      <td>${data.IdAnnouncement}</td>
-      <td>${data.Announcement}</td>
-      <td>${data.AnnouncementDate}</td>
-      <td>${data.createdby}</td>
-      <td>${data.AnnouncemnentStaus}</td>
+      <td>${data.MBookingId}</td>
+      <td>${data. BookingType}</td>
+      <td>${data.BookingDate}</td>
+      <td>${data.BookingTime}</td>
+      <td>${data.BoookingDuration}</td>
+      <td>${data.Bookedby}</td>
+      <td>${data.BookingStatus}</td>
+    
       <td class="action-buttons">
-        <button class="edit-btn" onclick="editData(${data.IdAnnouncement})">Approve</button>
-        <button class="delete-btn" onclick="deleteData(${data.IdAnnouncement})">Reject</button>
+        <button class="edit-btn" onclick="editData(${data.MBookingId})">Approve</button>
+        <button class="delete-btn" onclick="deleteData(${data.MBookingId})">Reject</button>
       </td>
     `;
     tableBody.appendChild(row);
@@ -133,18 +143,18 @@ function sendRequest(method, url, data = null) { return new Promise((resolve, re
       });
   });
 }
-async function editData(IdAnnouncement) {
+async function editData(MBookingId) {
     
     const data = {
-    IdAnnouncement:IdAnnouncement,
+        MBookingId:MBookingId,
 
-    AnnouncemnentStaus: "Active",
+        BookingStatus: "CONFIRMED",
 
   
       };
       console.log(data);
      
-      const response = await fetch(`http://localhost:3000/Announcement/Change-status/${IdAnnouncement}`, {
+      const response = await fetch(`http://localhost:3000/Booking/Change-status/${MBookingId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -155,17 +165,18 @@ async function editData(IdAnnouncement) {
     if (response.ok) {
       alert('APPOOVED!');
       registerForm.reset();
+      refreshPage()
     } else {
       alert('Failed to register admin!');
     }
 }
 
-   function deleteData(IdAnnouncement) {
-       fetch(`http://localhost:3000/Announcement/delete/${IdAnnouncement}`, { method: 'DELETE' })
+   function deleteData(MBookingId) {
+       fetch(`http://localhost:3000/Booking/delete/${MBookingId}`, { method: 'DELETE' })
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            alert('Admin deleted successfully.');
+            alert('Rejected.');
             // Redirect to the admin dashboard page
             window.location.href = '/viewMosjid.html';
           } else {
@@ -174,7 +185,8 @@ async function editData(IdAnnouncement) {
         })
         .catch(error => {
           console.error(error);
-          alert('Admin deleted successfully.');
+          alert('REJECTED.');
+          refreshPage()
           
           
         });

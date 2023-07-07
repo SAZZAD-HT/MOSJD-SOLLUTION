@@ -81,6 +81,9 @@
   </table>
 
   <script >
+     function refreshPage() {
+    location.reload();
+  }
     const apiUrl = 'http://localhost:3000/Announcement';
 const tableBody = document.querySelector('tbody');
 
@@ -138,7 +141,7 @@ async function editData(IdAnnouncement) {
     const data = {
     IdAnnouncement:IdAnnouncement,
 
-    AnnouncemnentStaus: "Active",
+    AnnouncemnentStaus: "ACTIVE",
 
   
       };
@@ -154,6 +157,7 @@ async function editData(IdAnnouncement) {
 
     if (response.ok) {
       alert('APPOOVED!');
+      refreshPage()
       registerForm.reset();
     } else {
       alert('Failed to register admin!');
@@ -174,7 +178,9 @@ async function editData(IdAnnouncement) {
         })
         .catch(error => {
           console.error(error);
-          alert('Admin deleted successfully.');
+          alert('Rejected.');
+          refreshPage()
+          
           
           
         });

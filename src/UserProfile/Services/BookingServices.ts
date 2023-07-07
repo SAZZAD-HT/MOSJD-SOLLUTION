@@ -37,17 +37,23 @@ async ForMosjidApprove(BookingType:string,BookingStatus:string): Promise<Booking
 console.log(val);
 return val;
 }   
-async bstauschange(B:booked): Promise<BookingMosque> {
-
-   return await this.book.save(B);
+async bstauschange(id:number,B:booked): Promise<void> {
+   
+  await this.book.update(id,B);
 }
-async BoookingConfirmed(BookingStatus:string): Promise<BookingMosque> {
-    return await this.book.findOne({where:[
+async BoookingConfirmed(BookingStatus:string): Promise<BookingMosque[]> {
+    return await this.book.find({where:[
      
-        {BookingStatus: 'ACTIVE' },
+        {BookingStatus: 'CONFIRMED' },
        
     ],
-    });
+    });}
 
 
-}}
+
+async delete(MBookingId: number): Promise<void> {
+    await this.book.delete(MBookingId);
+    
+   
+}
+  }

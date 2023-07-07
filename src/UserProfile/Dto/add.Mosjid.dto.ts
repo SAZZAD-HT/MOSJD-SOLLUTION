@@ -53,3 +53,36 @@ export class AddMosjidDto {
   
 
 }
+export class namazdto { 
+   
+    @IsNumber()
+    IdMosque: number;
+  
+    @IsNotEmpty()
+    @IsString()
+    Fazar: string;
+  
+    @IsNotEmpty()
+    @IsString()
+    Zuhur: string;
+  
+    @IsNotEmpty()
+    @IsString()
+    Asor: string;
+  
+    @IsNotEmpty()
+    @IsString()
+    magrib: string;
+  
+    @IsNotEmpty()
+    @IsString()
+    esha: string;
+  
+    @IsNotEmpty()
+    @IsString()
+    Jummah: string;
+  
+   
+  
+
+}
