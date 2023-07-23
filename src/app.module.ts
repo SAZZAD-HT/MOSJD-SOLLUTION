@@ -6,6 +6,7 @@ import { Admin } from 'typeorm';
 
 import { DatabaseModulemosque } from './UserProfile/DatabaseConfig/database.Config';
 import { UserService } from './UserProfile/Services/add.User.Service';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 
 
@@ -14,7 +15,25 @@ import { UserService } from './UserProfile/Services/add.User.Service';
 
 @Module({
 
-  imports: [DatabaseModulemosque],
+  imports: [DatabaseModulemosque,MailerModule.forRoot({
+
+    transport: {
+
+      port: 465,
+
+      host: 'smtp.gmail.com',
+
+      auth: {
+
+        user: 'sazzadaiub1@gmail.com',
+
+        pass: '',
+
+      },
+
+    },
+
+  }),],
   controllers: [],
   providers: [],
 })

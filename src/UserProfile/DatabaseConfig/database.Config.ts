@@ -16,6 +16,8 @@ import { BookingController } from 'src/Bookings.Controller';
 import { AnnouncmentController } from 'src/Announcement.controller';
 import { Donationentity } from '../Entity/DonationEntity';
 import { DonationController } from 'src/DonationController';
+import { EmailService } from '../Services/emailService';
+import { EmailController } from '../EmailController';
 
 
 @Module({
@@ -32,8 +34,8 @@ import { DonationController } from 'src/DonationController';
         synchronize: false,
 	}),TypeOrmModule.forFeature([BookingMosque,Mosque,User,UserBookings,Announcemententity,Donationentity])
 	],
-  providers: [UserService,OthersServices,MosjidService,BookingServices,AnnouncmentService],
-  controllers: [UserController,MosjidController,BookingController,AnnouncmentController ]
+  providers: [UserService,OthersServices,MosjidService,BookingServices,AnnouncmentService,EmailService ],
+  controllers: [UserController,MosjidController,BookingController,AnnouncmentController ,EmailController,]
 
   
 })

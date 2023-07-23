@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mosjid Namaz Time Setting</title>
+ <style>body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    width: 90%;
+    margin: 50px auto;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input[type="number"],
+  input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    transition: border-color 0.3s;
+  }
+  
+  input[type="number"]:focus,
+  input[type="text"]:focus {
+    outline: none;
+    border-color: #4CAF50;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+
+ </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Mosjid Namaz Time Setting</h1>
+    <form id="namazTimeForm">
+      <label for="userId">User ID:</label>
+      <input type="number" id="userId" placeholder="Enter User ID">
+
+      <label for="fazar">Fazar Time:</label>
+      <input type="text" id="fazar" placeholder="Enter Fazar Time">
+
+      <label for="zuhur">Zuhur Time:</label>
+      <input type="text" id="zuhur" placeholder="Enter Zuhur Time">
+
+      <label for="asor">Asor Time:</label>
+      <input type="text" id="asor" placeholder="Enter Asor Time">
+
+      <label for="magrib">Magrib Time:</label>
+      <input type="text" id="magrib" placeholder="Enter Magrib Time">
+
+      <label for="esha">Esha Time:</label>
+      <input type="text" id="esha" placeholder="Enter Esha Time">
+
+      <label for="jummah">Jummah Time:</label>
+      <input type="text" id="jummah" placeholder="Enter Jummah Time">
+
+      <button type="submit">Save Namaz Time</button>
+    </form>
+  </div>
+
+  <script >document.getElementById('namazTimeForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+  
+    const userId = document.getElementById('userId').value;
+    const fazar = document.getElementById('fazar').value;
+    const zuhur = document.getElementById('zuhur').value;
+    const asor = document.getElementById('asor').value;
+    const magrib = document.getElementById('magrib').value;
+    const esha = document.getElementById('esha').value;
+    const jummah = document.getElementById('jummah').value;
+  
+    const namazTimeData = {
+      "IdMosque": userId,
+      "Fazar": fazar,
+      "Zuhur": zuhur,
+      "Asor": asor,
+      "magrib": magrib,
+      "esha": esha,
+      "Jummah": jummah
+    };
+  
+    // Send the namazTimeData to the API endpoint using fetch
+    fetch('http://localhost:3000/mosjid/setnamazTime/' + userId, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(namazTimeData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert('Namaz time saved successfully!');
+      console.log(data); // You can log the response data if needed
+    })
+    .catch(error => {
+      alert('An error occurred while saving the namaz time.');
+      console.error(error);
+    });
+  });
+  </script>
+</body>
+</html>

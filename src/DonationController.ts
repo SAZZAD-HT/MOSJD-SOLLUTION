@@ -19,7 +19,7 @@ export class DonationController {
         return data;
     }
     //Individual
-    @Get(':id')
+    @Get('/:id')
     async findOne(@Param('id', ParseIntPipe) DonationId: number): Promise<Donationentity> {
         return await this.Donation.findOne(DonationId);
     }
