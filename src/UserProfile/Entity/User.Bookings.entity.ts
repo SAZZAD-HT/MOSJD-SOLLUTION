@@ -3,8 +3,8 @@ import { User } from './User.entity';
 
 @Entity()
 export class UserBookings {
-  @PrimaryGeneratedColumn()
-  BookId: number;
+  @PrimaryGeneratedColumn("identity")
+ 
 
   @ManyToOne(() => User, user => user.bookings)
   user: User;

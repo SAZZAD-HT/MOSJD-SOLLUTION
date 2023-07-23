@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()
 export class Announcemententity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("identity")
 
   IdAnnouncement: number;   
   @Column()

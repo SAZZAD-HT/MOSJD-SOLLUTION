@@ -151,8 +151,7 @@
 <button onclick="getAllAdmins()">Get All Admins</button>
 <ul id="adminsList"></ul>
 <form onsubmit="event.preventDefault(); createAdmin() ">
-    <label for="MosqueName">Mosque ID:</label>
-    <input type="number" id="MosqueID" required>
+
     <label for="MosqueName">Mosque Name:</label>
     <input type="text" id="MosqueName" required>
     <br>
@@ -343,7 +342,7 @@ function getAllAdmins() {
 
 // Create admin
 function createAdmin() {
-    const IDMosque = document.getElementById('MosqueID').value;
+
     const mosqueName = document.getElementById('MosqueName').value;
   const location = document.getElementById('MLocation').value;
   const city = document.getElementById('city').value;
@@ -357,7 +356,7 @@ function createAdmin() {
   const jummah = document.getElementById('Jummah').value;
   const announcement = document.getElementById('Announcement').value;
   const data = {
-    IDMosque: IDMosque,
+ 
     MosqueName: mosqueName,
     MLocation: location,
     city: city,

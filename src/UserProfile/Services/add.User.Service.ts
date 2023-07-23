@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { AddUserDto } from '../Dto/add.user.Dto';
 import { User } from '../Entity/User.entity';
+import { namazdto } from '../Dto/add.Mosjid.dto';
 
 @Injectable()
 export class UserService {
@@ -31,7 +32,14 @@ export class UserService {
     }
     
     async delete(id: number): Promise<void> {
-        await this.userRepo.delete(id);
+
+        if(!await this.userRepo.findOneBy({UserId:id})){
+            throw new NotFoundException('User not found');}
+            else{
+                await this.userRepo.delete(id);
+
+            }
+       
     }
 
     async findOne(UserId: number): Promise<User> {
@@ -76,5 +84,6 @@ export class UserService {
             ;
     
         }
+        
 
     }

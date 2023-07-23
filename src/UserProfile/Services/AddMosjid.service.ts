@@ -50,6 +50,9 @@ export class MosjidService {
             await this.userRepo.update(id,namz);
 
         
+        }///namaz time  
+        async ChangeNamzeTime(id: number, user: namazdto): Promise<void> {
+            await this.userRepo.update(id, user);
         }
 }
 

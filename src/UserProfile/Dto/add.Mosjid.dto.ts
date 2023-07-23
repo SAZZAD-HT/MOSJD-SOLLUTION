@@ -84,7 +84,7 @@ export class namazdto {
     @IsString()
     Jummah: string;
   
-   
+
   
 
 }

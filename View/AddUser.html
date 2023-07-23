@@ -123,7 +123,7 @@
   <div class="header">
     <h1>Registration</h1>
    
-    <a class="mosjid-button" href="#">Mosjid</a>
+    <a class="mosjid-button" href="./index.html">Mosjid</a>
     <a class="user-button" href="#">User</a>
   
   </div>
@@ -136,8 +136,7 @@
     <label for="UseName">UseName:</label>
     <input type="text" id="UseName" required>
     <br>
-    <label for="userId">User ID:</label>
-    <input type="number" id="userId" required>
+   
     <br>
     <label for="UserEmail">User Email:</label>
     <input type="email" id="UserEmail" required>
@@ -268,14 +267,14 @@ function getAllAdmins() {
 // Create admin
 function createAdmin() {
   const UseName = document.getElementById('UseName').value;
-  const userId = document.getElementById('userId').value;
+
   const UserEmail = document.getElementById('UserEmail').value;
   const UserPassword = document.getElementById('UserUserPassword').value;
   const Role = document.getElementById('userRole').value;
   const status = document.getElementById('status').value;
   const Contact = document.getElementById('Contact').value;
   const data = { UserName:UseName, 
-    UserId:userId, 
+   
     UserEmail:UserEmail, 
     UserPassword:UserPassword,
     Role: Role, 

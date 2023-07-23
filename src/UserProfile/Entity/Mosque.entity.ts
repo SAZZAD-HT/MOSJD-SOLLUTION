@@ -3,7 +3,7 @@ import { BookingMosque } from './Booking.Mosque.Entity';
 
 @Entity()
 export class Mosque {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("identity")
   IdMosque: number;
 
   @Column()

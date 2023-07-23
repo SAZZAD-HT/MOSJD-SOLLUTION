@@ -269,20 +269,21 @@ async function fetchData() {
 
 async function displayData() {
   const adminData = await fetchData();
+  console.log('adminData:', adminData); 
   tableBody.innerHTML = '';
 
   adminData.forEach((data, index) => {
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${index + 1}</td>
-      <td>${data.UserName}</td>
-      <td>${data.UserEmail}</td>
-      <td>${data.UserPassword}</td
-      <td>${data.Contact}</td>
-      <td>${data.Role}</td>
-      <td>${data.Status}</td>
-      <td>${data.Description}</td>
-      <td>${data.MobileNumber}</td>
+      <td>${data?.UserName || ''}</td>
+      <td>${data?.UserEmail|| '-'}</td>
+      <td>${data?.UserPassword|| '-'}</td
+      <td>${data?.Contact|| '-'}</td>
+      <td>${data?.Role|| '-'}</td>
+      <td>${data?.Status|| '-'}</td>
+      <td>${data?.Description || '-'}</td>
+      <td>${data?.MobileNumber|| '-'}</td>
     
       <td class="action-buttons">
         <button class="edit-btn" onclick="editData(${data.UserId})">Edit</button>
