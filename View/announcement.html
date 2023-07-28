@@ -47,8 +47,8 @@ table tr:nth-child(even) {
   <table id="userTable">
     <thead>
       <tr>
-        <th>Mosque Name</th>
-        <th>Location</th>
+        <th>Annnouncement Date</th>
+        <th>Status</th>
         <th> Announcement</th>
       
       </tr>
@@ -58,7 +58,7 @@ table tr:nth-child(even) {
     </tbody>
   </table>
   <script>
-    const apiUrl = 'http://localhost:3000/mosjid'; // Update the API URL if needed
+    const apiUrl = 'http://localhost:3000/Announcements'; // Update the API URL if needed
     const tableBody = document.querySelector('tbody');
 
     async function fetchData() {
@@ -79,8 +79,8 @@ table tr:nth-child(even) {
       adminData.forEach((data) => {
         const row = document.createElement('tr');
         row.innerHTML = `
-          <td>${data.MosqueName}</td>
-          <td>${data.MLocation}</td>
+          <td>${data.AnnouncementDate}</td>
+          <td>${data.AnnouncemnentStaus}</td>
           <td>${data. Announcement}</td>
          
         `;
