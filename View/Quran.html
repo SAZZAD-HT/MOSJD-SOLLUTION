@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quran</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f9f9f9;
+    }
+
+    .gallery-container {
+      position: relative;
+      overflow: hidden;
+      border: 10px solid #e74c3c;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-nav {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .gallery-nav button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .gallery-nav button:hover {
+      background-color: #2980b9;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      position: top;
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+  <h1 >Quran</h1>
+  <div class="gallery-container">
+    <img src="https://via.placeholder.com/800x600" alt="Picture 1">
+    <div class="gallery-nav">
+      <button id="prevBtn">Previous</button>
+      <button id="nextBtn">Next</button>
+    </div>
+  </div>
+
+  <script>
+    const images = [
+      "https://media.istockphoto.com/id/134121830/photo/arabian-calligraphy.jpg?s=612x612&w=0&k=20&c=huSrOTSth7zBhXvG8sj5bNHLX9AF4khfYWwAy8gokDo=",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqkUnJIV0Nel_KUUCbepbjdhIU6SlSt-raWQ&usqp=CAU/800x600/ff0000",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0OWFbCYK-dJpzh8xLbT_quaXKVCvm_3FEBw&usqp=CAU",
+      // Add more image URLs as needed
+    ];
+
+    let currentImageIndex = 0;
+
+    const imageElement = document.querySelector(".gallery-container img");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function showImage(index) {
+      imageElement.src = images[index];
+      currentImageIndex = index;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      showImage(currentImageIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      showImage(currentImageIndex);
+    });
+
+    // Show the first image when the page loads
+    showImage(currentImageIndex);
+  </script>
+</body>
+</html>

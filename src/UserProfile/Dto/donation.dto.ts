@@ -6,4 +6,5 @@ export class DonationDto {
     DonationId: number;   
     @IsNumber()
     Amount: number;
+    MosqueName: string;
 }

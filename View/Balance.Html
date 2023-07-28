@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mosque Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      color: #333;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .result {
+      margin-top: 20px;
+    }
+
+    .result p {
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Mosque Details</h1>
+    <div class="form-group">
+      <label for="mosqueId">Enter Mosque ID:</label>
+      <input type="text" id="mosqueId" required>
+    </div>
+    <button type="button" id="submitBtn">Submit</button>
+    <div class="result" id="resultContainer">
+      <!-- The mosque details will be displayed here -->
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const submitBtn = document.getElementById("submitBtn");
+      const mosqueIdInput = document.getElementById("mosqueId");
+      const resultContainer = document.getElementById("resultContainer");
+
+      submitBtn.addEventListener("click", () => {
+        const mosqueId = mosqueIdInput.value.trim();
+        if (mosqueId === "") {
+          alert("Please enter a valid Mosque ID.");
+          return;
+        }
+
+        // Fetch data from the API
+        fetch(`http://localhost:3000/mosjid/${mosqueId}`)
+          .then(response => response.json())
+          .then(data => {
+            // Display the relevant data
+            const resultHtml = `
+              <p>Mosque Name: ${data.MosqueName}</p>
+              <p>City: ${data.city}</p>
+              <p>Amount: ${data.Amount}</p>
+            `;
+            resultContainer.innerHTML = resultHtml;
+          })
+          .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred while fetching the data.");
+          });
+      });
+    });
+  </script>
+</body>
+</html>

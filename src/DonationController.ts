@@ -12,6 +12,7 @@ export class DonationController {
     constructor(private readonly Donation:DonationService,
          ) {}
     
+
       
     @Get()
     async findAll(): Promise<Donationentity[]> {
@@ -23,9 +24,10 @@ export class DonationController {
     async findOne(@Param('id', ParseIntPipe) DonationId: number): Promise<Donationentity> {
         return await this.Donation.findOne(DonationId);
     }
-    @Post('/create')
+    @Post('/DonateNow')
     async create(@Body() Donation: DonationDto): Promise<Donationentity> {
-        return await this.Donation.CreateDonation(Donation);
+        console.log(Donation);
+        return await this.Donation.DonateNow(Donation);
     }
     @Put('/update/:id')
     async update(@Param('id', ParseIntPipe) DonationId: number, @Body() Donation: DonationDto): Promise<void> {

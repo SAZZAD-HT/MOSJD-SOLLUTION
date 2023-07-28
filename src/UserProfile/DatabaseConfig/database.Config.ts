@@ -18,6 +18,7 @@ import { Donationentity } from '../Entity/DonationEntity';
 import { DonationController } from 'src/DonationController';
 import { EmailService } from '../Services/emailService';
 import { EmailController } from '../EmailController';
+import { DonationService } from '../Services/Donation.service';
 
 
 @Module({
@@ -31,11 +32,11 @@ import { EmailController } from '../EmailController';
         database: 'islam',
         //entities: [Mosque,User,UserBookings,BookingMosque,Announcemententity],
         autoLoadEntities: true,
-        synchronize: false,
+        synchronize: true,
 	}),TypeOrmModule.forFeature([BookingMosque,Mosque,User,UserBookings,Announcemententity,Donationentity])
 	],
-  providers: [UserService,OthersServices,MosjidService,BookingServices,AnnouncmentService,EmailService ],
-  controllers: [UserController,MosjidController,BookingController,AnnouncmentController ,EmailController,]
+  providers: [UserService,OthersServices,MosjidService,BookingServices,AnnouncmentService,EmailService ,DonationService],
+  controllers: [UserController,MosjidController,BookingController,AnnouncmentController ,EmailController,DonationController]
 
   
 })

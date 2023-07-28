@@ -40,9 +40,8 @@ export class Mosque {
   Jummah: string;
 
   @Column()
-  Announcement: string;
-  @Column()
-  DonationId: number;
+  Amount: number | null;
+  
 
  
 }

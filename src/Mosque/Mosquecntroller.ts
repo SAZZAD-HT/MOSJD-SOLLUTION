@@ -35,7 +35,7 @@ export class MosjidController {
         return dr;
     }
     
-    @Get(':userId')
+    @Get('/:userId')
      async getMosqueDataByUserId(@Param('userId') userId: number): Promise<any> {
      var data=await this.MosjidService.findOne(userId);
      return data;

@@ -5,16 +5,46 @@ import { Repository } from 'typeorm';
 import { retry } from 'rxjs';
 import { Donationentity } from '../Entity/DonationEntity';
 import { DonationDto } from '../Dto/donation.dto';
+import { Mosque } from '../Entity/Mosque.entity';
 
 
 @Injectable()
 export class DonationService {
   constructor(
     @InjectRepository(Donationentity)
-    private readonly anny: Repository<Donationentity>
+    private readonly anny: Repository<Donationentity>,
+    @InjectRepository(Mosque)
+    private readonly Mosque: Repository<Mosque>
   ) {}
-  async CreateDonation(announcement: Donationentity): Promise<Donationentity> {
-    return await this.anny.save(announcement);
+  async DonateNow(announcement: DonationDto): Promise<Donationentity> {
+    announcement.MosqueName;
+
+
+   const data=await this.Mosque.findOneBy({MosqueName:announcement.MosqueName});
+    try{
+      if(data==null){
+        throw new Error("Mosque Not Found");}
+        console.log( data.Amount);
+        console.log(  announcement.Amount);
+
+
+      data.Amount=data.Amount+announcement.Amount;
+      console.log(data.Amount);
+     await this.Mosque.update(data.IdMosque,data);
+     var map={
+      Amount:announcement.Amount,
+      
+    }
+
+
+
+    return await this.anny.save(map);
+
+    }
+    catch(error){
+      console.log(error);
+    }
+    
   }
   async AllDonation(): Promise<Donationentity[]>{
     var data=await this.anny.find();
