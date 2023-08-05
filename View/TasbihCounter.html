@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Counter with Limit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .counter {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .reset-btn {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="counter" id="counterDisplay">0</div>
+    <button class="button" onclick="increment()">Increase</button>
+    <button class="button reset-btn" onclick="reset()">Reset</button>
+
+    <script>
+        let counterValue = 0;
+        const counterDisplay = document.getElementById('counterDisplay');
+        const countLimit = 10; // Change this value to set the count limit
+
+        function increment() {
+            if (counterValue < countLimit) {
+                counterValue++;
+                updateCounterDisplay();
+            } else {
+                alert('Count limit reached!');
+            }
+        }
+
+        function reset() {
+            counterValue = 0;
+            updateCounterDisplay();
+        }
+
+        function updateCounterDisplay() {
+            counterDisplay.textContent = counterValue;
+        }
+
+        updateCounterDisplay(); // Set initial value on page load
+    </script>
+</body>
+</html>
