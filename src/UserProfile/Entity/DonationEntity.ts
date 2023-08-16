@@ -7,7 +7,7 @@ export class Donationentity {
 
   DonationId: number;   
   @Column()
-  Amount: number;
+  Amount: Number;
  
 
   

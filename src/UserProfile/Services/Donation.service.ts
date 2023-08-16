@@ -26,9 +26,12 @@ export class DonationService {
         throw new Error("Mosque Not Found");}
         console.log( data.Amount);
         console.log(  announcement.Amount);
+        const data1= (parseFloat(data.Amount ) + parseFloat(announcement.Amount ));
 
+ 
+        data.Amount =data1.toString();
+        
 
-      data.Amount=data.Amount+announcement.Amount;
       console.log(data.Amount);
      await this.Mosque.update(data.IdMosque,data);
      var map={

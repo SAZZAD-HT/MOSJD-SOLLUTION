@@ -1,245 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Mosjid Management</title>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: rgb(39, 141, 141);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Announcement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
 
-    h1, h2 {
-      color: #333;
-      text-decoration: underline;
-    }.header {
-      background: #333;
-      color: #fff;
-      padding: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
 
-    .header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .header .sign-out {
-      color: #1bd6a7;
-      text-decoration: none;
-    }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+        }
 
-    .header .mosjid-button {
-      background: red;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 16px;
-    }
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            transition: border-color 0.3s;
+        }
 
-    .header .mosjid-button:hover {
-      background: #cc0000;
-    }
-    
-    .header .user-button {
-      background: red;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 16px;
-    }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
 
-    .header .user-button:hover {
-      background: #cc0000;
-    }
-    body {
-      font-family: Arial, sans-serif;
-    }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-    h1 {
-      color: #e7e2e2;
-    }
-
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      cursor: pointer;
-    }
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    li {
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-
-    form {
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    input[type="email"],
-    input[type="password"] {
-      padding: 5px;
-      width: 200px;
-    }
-
-    button[type="submit"] {
-      background-color: #4CAF50;
-      color: white;
-      padding: 5px 10px;
-      border: none;
-      cursor: pointer;
-    }
-      .error-message {
-          display: none;
-          background-color: #f44336;
-          color: #fff;
-          padding: 10px;
-          border-radius: 4px;
-          margin-top: 10px;
-      }
-      
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      cursor: pointer;
-      animation: fadeInButton 1s ease;
-    }
-
-    /* Define the animation */
-    @keyframes fadeInButton {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-  </style>
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="header">
-    <h1>Create Annnouncement</h1>
-   
-    
-    <a class="user-button" href="../User.html">User</a>
-  
-  </div>
+    <h1>Create Announcement</h1>
+    <form id="announcementForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" required><br>
 
+        <label for="content">Content:</label>
+        <input type="date" id="content" required><br>
 
+        <button type="submit">Create Announcement</button>
+    </form>
 
-<ul id="adminsList"></ul>
-<form  onsubmit="event.preventDefault(); createAdmin()">
-    <label for="IdAnnouncement">IdAnnouncement</label>
-    <input type="number" id="MosqueID" required>
-    <label for="MosqueName">Announcement</label>
-    <input type="text" id="MosqueName" required>
-    <br>
-    <label for="MLocation">AnnouncementDate:</label>
-    <input type="text" id="MLocation" required>
-    <br>
-    
-    <br>
-    <button type="submit" > Create Mosque</button>
-  </form>
-  
- 
+    <script>
+        document.getElementById("announcementForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
 
+            const title = document.getElementById("title").value;
+            const content = document.getElementById("content").value;
 
+            function randomId() {
+                return Math.floor(Math.random() * 1000000000); // Generates a random number between 0 and 999999999
+            }
 
-<script>
-    const queryParams = new URLSearchParams(window.location.search);
-const userId = queryParams.get('userId');
-const baseURL = 'http://localhost:3000/Announcement'; // Replace with your API base URL
+            const payload = {
+                IdAnnouncement: randomId(),
+                Announcement: title,
+                AnnouncementDate: content,
+                createdby: "BHOOT",
+                AnnouncemnentStaus: "Active"
 
-function sendRequest(method, url, data = null) {
-  return new Promise((resolve, reject) => {
-    axios({
-      method: method,
-      url: url,
-      data: data,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        resolve(response.data);
-      })
-      .catch(error => {
-        reject(error);
-      });
-  });
-}
+            };
 
+            try {
+                const response = await fetch("http://localhost:3000/announcement/create", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
 
-
-   
-
-// Create admin
-function createAdmin() {
-    const IdAnnouncement = document.getElementById('MosqueID').value;
-    const Announcement= document.getElementById('MosqueName').value;
-  const AnnouncementDate = document.getElementById('MLocation').value;
- 
-  const data = {
-    IdAnnouncement:IdAnnouncement,
-    Announcement: Announcement,
-    AnnouncementDate:AnnouncementDate,
-    AnnouncemnentStaus:"NotApproved",
-    createdby:"USER"
-
-
-    
-  };
-  console.log(data);
-  
-  const url = `${baseURL}/create`;
-  sendRequest('POST', url, data)
-    .then(response => {
-      console.log(response);
-      console.log("Announcement ADDED successfully");
-      alert('Announcement ADDED successfully!');
-    })
-    .catch(error => {
-      console.error(error);
-      console.log("Failed to create admin");
-      alert(error.response.data.message); 
-    });if (response.ok) {
-      alert('Admin registered successfully!');
-      window.location.href = '/adminHome.html';
-     
-      registerForm.reset();
-    } else {
-      alert('Failed to register admin!'); alert('Failed to register admin!');
-    }
-}
-// Get admin by ID
-
-// Update admin by ID
-
-
-
-</script>
+                if (response.ok) {
+                    alert("Announcement created successfully!");
+                } else {
+                    alert("Error creating announcement.");
+                }
+            } catch (error) {
+                console.error("An error occurred:", error);
+                alert("An error occurred while creating the announcement.");
+            }
+        });
+    </script>
 </body>
+
 </html>

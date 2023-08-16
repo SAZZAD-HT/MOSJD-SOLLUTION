@@ -151,8 +151,7 @@
 
 <ul id="adminsList"></ul>
 <form onsubmit="event.preventDefault(); createAdmin() ">
-    <label for="MosqueName">Booking ID :</label>
-    <input type="number" id="MosqueID" required>
+  
     <label for="MosqueName">BookingTime</label>
     <input type="text" id="MosqueName" required>
     <br>
@@ -294,20 +293,23 @@ function sendRequest(method, url, data = null) {
 
 // Create admin
 function createAdmin() {
-    const IDMosque = document.getElementById('MosqueID').value;
+   
     const mosqueName = document.getElementById('MosqueName').value;
   const location = document.getElementById('MLocation').value;
   const city = document.getElementById('city').value;
   const description = document.getElementById('Description').value;
   const capacity = document.getElementById('Capacity').value;
-  
+  function randomId() {
+                return Math.floor(Math.random() * 1000000000); // Generates a random number between 0 and 999999999
+            }
   const data = {
-    MBookingId: IDMosque,
+    MBookingId: randomId(),
     BookingTime: mosqueName,
     BookingDate: location,
     BoookingDuration: city,
     Bookedby: description,
     BookingStatus: "PENDING",
+    BookingBy: "Imam",
 
     BookingType: capacity,
     

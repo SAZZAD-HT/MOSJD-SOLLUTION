@@ -6,6 +6,7 @@ import { OthersServices } from 'src/UserProfile/Services/Others.Services';
 import { MosjidService } from 'src/UserProfile/Services/AddMosjid.service';
 
 
+
 @Controller('Mosjid')
 export class MosjidController {
 

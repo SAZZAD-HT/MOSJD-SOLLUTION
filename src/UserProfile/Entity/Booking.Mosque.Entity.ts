@@ -3,10 +3,8 @@ import { Mosque } from './Mosque.entity';
 
 @Entity()
 export class BookingMosque {
-  @PrimaryGeneratedColumn("identity")
+  @PrimaryGeneratedColumn()
   MBookingId: number;
- 
-
  
   @Column()
   BookingTime: String;
@@ -23,6 +21,9 @@ export class BookingMosque {
 
   @Column()
   BookingType: string;
+  @Column()
+  BookingBy: string;
+
 
 
 }

@@ -148,14 +148,14 @@
     <input type="text" id="Contact" required>
     <br>
     <br>
-    <label for="Role">Role:</label>
+    <label for="Role"></label>
     
-    <select id="userRole" required>
+    <!-- <select id="userRole" required>
       <option value="admin">Admin</option>
       <option value="user">User</option>
       <option value="mosjid">Mosjid</option>
       
-    </select>
+    </select> -->
     <br>
     <br>
     <label for="status">Status:</label>
@@ -270,14 +270,19 @@ function createAdmin() {
 
   const UserEmail = document.getElementById('UserEmail').value;
   const UserPassword = document.getElementById('UserUserPassword').value;
-  const Role = document.getElementById('userRole').value;
+  //const Role = document.getElementById('userRole').value;
   const status = document.getElementById('status').value;
   const Contact = document.getElementById('Contact').value;
-  const data = { UserName:UseName, 
+  function randomId() {
+                return Math.floor(Math.random() * 1000000000); // Generates a random number between 0 and 999999999
+            }
+  const data = { 
+    UserId:randomId(),
+    UserName:UseName, 
    
     UserEmail:UserEmail, 
     UserPassword:UserPassword,
-    Role: Role, 
+    Role: "admin", 
     Status: status,
      Contact:Contact };
   console.log(data);

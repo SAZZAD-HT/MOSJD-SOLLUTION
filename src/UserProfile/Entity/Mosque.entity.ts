@@ -40,7 +40,7 @@ export class Mosque {
   Jummah: string;
 
   @Column()
-  Amount: number | null;
+  Amount: string ;
   
 
  

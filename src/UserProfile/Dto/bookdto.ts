@@ -22,6 +22,8 @@ export class BookDto{
   
 
     BookingType: string;
+    BookingBy: string;
+
 }
 
 export class booked{

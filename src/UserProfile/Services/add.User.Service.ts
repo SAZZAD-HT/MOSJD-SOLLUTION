@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { AddUserDto } from '../Dto/add.user.Dto';
 import { User } from '../Entity/User.entity';
 import { namazdto } from '../Dto/add.Mosjid.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -24,6 +25,9 @@ export class UserService {
     }
     
     async create(user: AddUserDto): Promise<User> {
+        user.UserPassword=await bcrypt.hash(user.UserPassword,10);
+
+
         return await this.userRepo.save(user);
     }
     
@@ -59,8 +63,8 @@ export class UserService {
             if (!user) {
                 console.log("User not found");
                 throw new NotFoundException('User not found');
-            }
-            if (user.UserPassword !== password) {
+            }const passwordMatch = await bcrypt.compare(password, user.UserPassword);
+            if (passwordMatch !) {
                 
                 console.log("Invalid password");
                 throw new BadRequestException('Invalid password');

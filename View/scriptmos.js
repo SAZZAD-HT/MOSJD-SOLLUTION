@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         body: jsonData,
       })
         .then((response) => {
-          // Handle the response from the API if needed
+          window.location.href = "./DONATIONHANDALE.html";
         })
         .catch((error) => {
           console.error("Error:", error);

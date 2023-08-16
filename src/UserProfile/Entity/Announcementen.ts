@@ -3,8 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()
 export class Announcemententity {
-  @PrimaryGeneratedColumn("identity")
-
+  @PrimaryGeneratedColumn()
   IdAnnouncement: number;   
   @Column()
   Announcement: string;
@@ -14,6 +13,7 @@ export class Announcemententity {
   AnnouncemnentStaus: string;
   @Column()
   createdby: string;
-
+ 
+  
   
 }
