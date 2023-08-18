@@ -81,7 +81,7 @@
       <th>esha</th>
       <th>Jummah</th>
       <th>Announcement</th>
-      <th>.</th>
+      <th>Balance</th>
        <th>.</th>
       </tr>
     </thead>
@@ -119,13 +119,14 @@ async function displayData() {
       <td>${data.city}</td>
       <td>${data.Description}</td>
       <td>${data.Capacity}</td>
-      <td>${data.Fazarn}</td>
+      <td>${data.Fazar}</td>
       <td>${data.Zuhur}</td>
       <td>${data.Asor}</td>
       <td>${data.magrib}</td>
       <td>${data.esha}</td>
       <td>${data.Jummah}</td>
       <td>${data.Announcement}</td>
+      <td>${data.Amount}</td>
       <td class="action-buttons">
         <button class="delete-btn" onclick="editData(${data.IdMosque})">Edit</button>
         <button class="delete-btn" onclick="deleteData(${data.IdMosque})">Delete</button>
