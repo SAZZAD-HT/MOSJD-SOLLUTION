@@ -25,7 +25,7 @@ export class DonationController {
         return await this.Donation.findOne(DonationId);
     }
     @Post('/DonateNow')
-    async create(@Body() Donation: DonationDto): Promise<Donationentity> {
+    async create(@Body() Donation: DonationDto) {
         console.log(Donation);
         return await this.Donation.DonateNow(Donation);
     }

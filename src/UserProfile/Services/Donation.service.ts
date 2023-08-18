@@ -16,32 +16,30 @@ export class DonationService {
     @InjectRepository(Mosque)
     private readonly Mosque: Repository<Mosque>
   ) {}
-  async DonateNow(announcement: DonationDto): Promise<Donationentity> {
+  async DonateNow(announcement: DonationDto) {
     announcement.MosqueName;
 
 
    const data=await this.Mosque.findOneBy({MosqueName:announcement.MosqueName});
+   console.log(data);
     try{
       if(data==null){
-        throw new Error("Mosque Not Found");}
+       // throw new Error("Mosque Not Found");
+      }
         console.log( data.Amount);
         console.log(  announcement.Amount);
         const data1= (parseFloat(data.Amount ) + parseFloat(announcement.Amount ));
 
- 
-        data.Amount =data1.toString();
+        var dat=data1.toString()
+        data.Amount =dat;
         
 
       console.log(data.Amount);
      await this.Mosque.update(data.IdMosque,data);
-     var map={
-      Amount:announcement.Amount,
-      
-    }
+     
+     
 
-
-
-    return await this.anny.save(map);
+    return"success" ;
 
     }
     catch(error){
