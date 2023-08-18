@@ -32,7 +32,7 @@ import { DonationService } from '../Services/Donation.service';
         database: 'islam',
         //entities: [Mosque,User,UserBookings,BookingMosque,Announcemententity],
         autoLoadEntities: true,
-        synchronize: true,
+        synchronize: false,
 	}),TypeOrmModule.forFeature([BookingMosque,Mosque,User,UserBookings,Announcemententity,Donationentity])
 	],
   providers: [UserService,OthersServices,MosjidService,BookingServices,AnnouncmentService,EmailService ,DonationService],
