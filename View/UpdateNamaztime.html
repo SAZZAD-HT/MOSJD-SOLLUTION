@@ -91,7 +91,9 @@
 
       <label for="jummah">Jummah Time:</label>
       <input type="text" id="jummah" placeholder="Enter Jummah Time">
-
+      <label for="Announcement">Announcement :</label>
+      <input type="text" id="Announcement" placeholder="Enter Announcement">
+      
       <button type="submit">Save Namaz Time</button>
     </form>
   </div>
@@ -106,6 +108,7 @@
     const magrib = document.getElementById('magrib').value;
     const esha = document.getElementById('esha').value;
     const jummah = document.getElementById('jummah').value;
+    const Announcement = document.getElementById('Announcement').value;
   
     const namazTimeData = {
       "IdMosque": userId,
@@ -114,7 +117,9 @@
       "Asor": asor,
       "magrib": magrib,
       "esha": esha,
-      "Jummah": jummah
+      "Jummah": jummah,
+      "Announcement": Announcement
+
     };
   
     // Send the namazTimeData to the API endpoint using fetch
@@ -127,7 +132,7 @@
     })
     .then(response => response.json())
     .then(data => {
-      alert('Namaz time saved successfully!');
+      alert(response.message);
       console.log(data); // You can log the response data if needed
     })
     .catch(error => {

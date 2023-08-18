@@ -23,6 +23,7 @@ export class BookDto{
 
     BookingType: string;
     BookingBy: string;
+    BookingEmail: string;
 
 }
 

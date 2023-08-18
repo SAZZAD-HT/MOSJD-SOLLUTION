@@ -164,8 +164,12 @@
     <label for="Description">Booked  BY Imam /User</label>
     <input type="text" id="Description" required>
     <br>
-    <label for="Capacity">Booking FO</label>
+    <label for="Capacity">Booking Capacity </label>
     <input type="text" id="Capacity" required>
+    <br>
+    <br>
+    <label for="Email">Booking Email </label>
+    <input type="text" id="Email" required>
     <br>
    
     <button type="submit">Create Mosque</button>
@@ -299,6 +303,7 @@ function createAdmin() {
   const city = document.getElementById('city').value;
   const description = document.getElementById('Description').value;
   const capacity = document.getElementById('Capacity').value;
+  const email = document.getElementById('Email').value;
   function randomId() {
                 return Math.floor(Math.random() * 1000000000); // Generates a random number between 0 and 999999999
             }
@@ -310,6 +315,7 @@ function createAdmin() {
     Bookedby: description,
     BookingStatus: "PENDING",
     BookingBy: "Imam",
+    BookingEmail: email,
 
     BookingType: capacity,
     

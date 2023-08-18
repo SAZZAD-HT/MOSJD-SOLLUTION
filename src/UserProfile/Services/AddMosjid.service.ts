@@ -27,8 +27,13 @@ export class MosjidService {
             return await this.userRepo.save(m);
         }
         
-        async mupdate(id: number, user: Mosque): Promise<void> {
-            await this.userRepo.update(id, user);
+        async mupdate(id: number, user: Mosque) {
+
+           if(await this.userRepo.update(id, user)){
+            return  "Updated";} 
+            else{
+                return "Not Updated";
+            }
         }
         
         async mdelete(id: number): Promise<void> {

@@ -25,6 +25,8 @@ export class UserService {
     }
     
     async create(user: AddUserDto): Promise<User> {
+        if(await this.userRepo.findOneBy({UserEmail:user.UserEmail})){
+            throw new BadRequestException('User already exists');}
         user.UserPassword=await bcrypt.hash(user.UserPassword,10);
 
 

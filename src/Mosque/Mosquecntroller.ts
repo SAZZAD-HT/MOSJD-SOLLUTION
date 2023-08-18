@@ -22,30 +22,31 @@ export class MosjidController {
         return await this.MosjidService.mfindAll();
     }
     @Post('/create')
-    async createMosjid(@Body() user:  AddMosjidDto): Promise<Mosque> {
+    async createMosjid(@Body() user:  AddMosjidDto) {
         return await this.MosjidService.mcreate(user);
     }
     @Put('/Mosjid/update/:id')
-    async updateMosjid(@Param('id', ParseIntPipe) id: number, @Body() user: Mosque): Promise<void> {
+    async updateMosjid(@Param('id', ParseIntPipe) id: number, @Body() user: Mosque) {
         console.log("Controller");
       var dr=  await this.MosjidService.mupdate(id, user);
-      return dr;}
+      }
     @Delete('/delete/:id')
-    async deleteMosjid(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    async deleteMosjid(@Param('id', ParseIntPipe) id: number) {
        var dr= await this.MosjidService.mdelete(id);
-        return dr;
+      
     }
     
     @Get('/:userId')
-     async getMosqueDataByUserId(@Param('userId') userId: number): Promise<any> {
+     async getMosqueDataByUserId(@Param('userId') userId: number) {
      var data=await this.MosjidService.findOne(userId);
      return data;
   }
-  @Put('/setnamazTime/:id')
-  async setnamazTime(@Param('id', ParseIntPipe) id: number, @Body() user: Mosque): Promise<void> {
+  @Post('/setnamazTime/:id')
+  async setnamazTime(@Param('id', ParseIntPipe) id: number, @Body() user: Mosque) {
       console.log("Controller");
     var dr=  await this.MosjidService.mupdate(id, user);
-    return dr;}
+
+  }
 
   }
   

@@ -17,6 +17,7 @@ export class Mosque {
 
   @Column()
   Description: string;
+  
 
   @Column()
   Capacity: string;
@@ -41,6 +42,8 @@ export class Mosque {
 
   @Column()
   Amount: string ;
+  @Column({ nullable: true })
+  Announcement: string ;
   
 
  

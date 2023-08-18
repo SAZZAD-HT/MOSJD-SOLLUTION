@@ -11,6 +11,7 @@ export class AnnouncemetDto {
   
   AnnouncemnentStaus: string;
   createdby: string;
+  
 
   
 }

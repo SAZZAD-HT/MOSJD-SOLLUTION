@@ -81,6 +81,8 @@
       <th>esha</th>
       <th>Jummah</th>
       <th>Announcement</th>
+      <th>.</th>
+       <th>.</th>
       </tr>
     </thead>
     <tbody>
@@ -113,6 +115,7 @@ async function displayData() {
       <td>${index + 1}</td>
       <td>${data.IdMosque}</td>
       <td>${data.MosqueName}</td>
+      <td>${data.MLocation}</td>
       <td>${data.city}</td>
       <td>${data.Description}</td>
       <td>${data.Capacity}</td>
@@ -124,7 +127,7 @@ async function displayData() {
       <td>${data.Jummah}</td>
       <td>${data.Announcement}</td>
       <td class="action-buttons">
-        <button class="edit-btn" onclick="editData(${data.IdMosque})">Edit</button>
+        <button class="delete-btn" onclick="editData(${data.IdMosque})">Edit</button>
         <button class="delete-btn" onclick="deleteData(${data.IdMosque})">Delete</button>
       </td>
     `;

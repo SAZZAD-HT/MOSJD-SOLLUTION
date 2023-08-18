@@ -60,7 +60,7 @@ export class UserController {
     async updateMosjid(@Param('id', ParseIntPipe) id: number, @Body() user: Mosque): Promise<void> {
         console.log("Controller");
       var dr=  await this.MosjidService.mupdate(id, user);
-      return dr;}
+      }
     @Delete('/Mosjid/delete/:id')
     async deleteMosjid(@Param('id', ParseIntPipe) id: number): Promise<void> {
        var dr= await this.MosjidService.mdelete(id);

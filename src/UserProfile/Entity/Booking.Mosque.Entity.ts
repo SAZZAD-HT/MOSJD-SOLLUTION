@@ -23,6 +23,8 @@ export class BookingMosque {
   BookingType: string;
   @Column()
   BookingBy: string;
+  @Column()
+  BookingEmail: string;
 
 
 
