@@ -15,6 +15,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 
 
 
+
 @Module({
 
   imports: [DatabaseModulemosque,MailerModule.forRoot({
