@@ -8,6 +8,7 @@ import { DatabaseModulemosque } from './UserProfile/DatabaseConfig/database.Conf
 import { UserService } from './UserProfile/Services/add.User.Service';
 import { MailerModule } from '@nestjs-modules/mailer';
 
+
 @Module({
 
   imports: [DatabaseModulemosque,MailerModule.forRoot({
